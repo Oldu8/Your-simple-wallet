@@ -1,0 +1,12 @@
+.row {
+  text-align: center;
+}
+td {
+  position: relative;
+}
+
+.price::before {
+  content: "$";
+  position: absolute;
+  left: 28%;
+}

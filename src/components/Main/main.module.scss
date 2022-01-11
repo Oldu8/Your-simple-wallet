@@ -1,0 +1,24 @@
+.wrap {
+  width: 85%;
+  height: 1000px;
+  margin: 0 auto;
+  background-color: rgb(209, 206, 202);
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+}
+
+.switchBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.switchBtn {
+  width: 45%;
+  border: 2px solid rgb(33, 2, 117);
+  font-size: 26px;
+  font-weight: bold;
+  height: 45px;
+  border-radius: 10px;
+}
