@@ -1,13 +1,20 @@
 import React from "react";
-// import "header.scss";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import s from "./header.module.scss";
 
 const Header = () => {
   return (
-    <header className={s.header}>
-      <div className={s.logo}></div>
-      <div className={s.headline}>Welcome to your friendly crypto wallet</div>
-    </header>
+    <AppBar position="static">
+      <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+        <Typography variant="h4" align="center">
+          Welcome to your friendly crypto wallet
+        </Typography>
+        <IconButton color="inherit" sx={{ ml: 5 }}>
+          <MonetizationOnIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 };
 

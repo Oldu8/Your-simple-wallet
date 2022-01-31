@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import { Container, Button } from "@mui/material";
 import Balance from "../Balance/balance";
 import Portfolio from "../Portfolio/portfolio";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
@@ -16,18 +17,32 @@ const Main = () => {
   return (
     <section className={s.wrap}>
       <div className={s.switchBlock}>
-        <button className={s.switchBtn} onClick={clickOnCoins}>
+        <Button
+          variant="contained"
+          size="large"
+          sx={{ borderRadius: 3 }}
+          className={s.switchBtn}
+          onClick={clickOnCoins}
+        >
           <Link to="/"> Top 10 coins</Link>
-        </button>
-        <button className={s.switchBtn} onClick={clickOnPortfolio}>
+        </Button>
+        <Button
+          variant="contained"
+          size="large"
+          sx={{ borderRadius: 3 }}
+          className={s.switchBtn}
+          onClick={clickOnPortfolio}
+        >
           <Link to="/portfolio"> My portfolio</Link>
-        </button>
+        </Button>
       </div>
-      <Routes>
-        <Route path="/" element={<ListOfCoins />}></Route>
-        <Route path="/portfolio" element={<Portfolio />}></Route>
-        <Route path="*" element={<ListOfCoins />}></Route>
-      </Routes>
+      <Container>
+        <Routes>
+          <Route path="/" element={<ListOfCoins />}></Route>
+          <Route path="/portfolio" element={<Portfolio />}></Route>
+          <Route path="*" element={<ListOfCoins />}></Route>
+        </Routes>
+      </Container>
     </section>
   );
 };

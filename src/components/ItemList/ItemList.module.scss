@@ -2,17 +2,17 @@ td {
   position: relative;
 }
 
-.price::before {
-  content: "$";
-  position: absolute;
-  left: 28%;
-  font-weight: 500;
-}
-.marketCap::before {
+// .price::before {
+//   content: "$";
+//   position: absolute;
+//   left: 28%;
+//   font-weight: 500;
+// }
+.marketCap::after {
   font-weight: 600;
   content: "$";
   position: absolute;
-  left: 32%;
+  right: 28%;
 }
 
 .row {
@@ -20,5 +20,9 @@ td {
 }
 
 .rank {
-  width: 8%;
+  width: 9%;
+}
+.img {
+  width: 30px;
+  height: 30px;
 }

@@ -7,7 +7,7 @@ const initialState = {
 export const getCoinsReducer = (state = initialState, action) => {
   switch (action.type) {
     case DOWNLOAD_COINS:
-      return { ...state, coins: [...state.coins, ...action.payload] };
+      return { ...state, coins: action.payload };
     case REMOVE_COINS:
       return { ...state, coins: [] };
     default:
