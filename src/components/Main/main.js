@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import Balance from "../Balance/balance";
 import Portfolio from "../Portfolio/portfolio";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
@@ -16,14 +17,17 @@ const Main = () => {
     <section className={s.wrap}>
       <div className={s.switchBlock}>
         <button className={s.switchBtn} onClick={clickOnCoins}>
-          Top 10 coins
+          <Link to="/"> Top 10 coins</Link>
         </button>
         <button className={s.switchBtn} onClick={clickOnPortfolio}>
-          My portfolio
+          <Link to="/portfolio"> My portfolio</Link>
         </button>
       </div>
-      <ListOfCoins />
-      {/* <Portfolio /> */}
+      <Routes>
+        <Route path="/" element={<ListOfCoins />}></Route>
+        <Route path="/portfolio" element={<Portfolio />}></Route>
+        <Route path="*" element={<ListOfCoins />}></Route>
+      </Routes>
     </section>
   );
 };
