@@ -1,30 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { connect } from "react-redux";
-import { downloadCoins, removeCoins } from "../../redux/actions";
+import { downloadCoins } from "../../redux/actions";
 import s from "./ListOfCoins.module.scss";
-import classNames from "classnames";
-import { Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+// import classNames from "classnames";
+import {
+  Typography,
+  styled,
+  Table,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Container,
+  Stack,
+  Pagination,
+} from "@mui/material";
 
 import getCoins from "../getCoins";
 
-const ListOfCoins = ({ topCoins, downloadCoins, removeCoins }) => {
-  const getCoinsList = async () => {
-    const result = await getCoins();
+const ListOfCoins = ({ topCoins, downloadCoins }) => {
+  const getCoinsList = async (page) => {
+    const result = await getCoins(page);
     downloadCoins(result);
   };
 
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    getCoinsList();
-  }, []);
+    getCoinsList(page);
+  }, [page]);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -65,7 +72,23 @@ const ListOfCoins = ({ topCoins, downloadCoins, removeCoins }) => {
           <ItemList />
         </Table>
       </TableContainer>
-      <div></div>
+      <Container
+        sx={{
+          pt: 3,
+          pb: 2,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Stack spacing={3}>
+          <Pagination
+            count={10}
+            page={page}
+            color="primary"
+            onChange={(_, num) => setPage(num)}
+          />
+        </Stack>
+      </Container>
     </section>
   );
 };
@@ -82,9 +105,9 @@ const mapDispatchToProps = (dispatch) => {
     downloadCoins: (data) => {
       dispatch({ type: "DOWNLOAD_COINS", payload: data });
     },
-    removeCoins: () => {
-      dispatch(removeCoins());
-    },
+    // removeCoins: () => {
+    //   dispatch(removeCoins());
+    // },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfCoins);

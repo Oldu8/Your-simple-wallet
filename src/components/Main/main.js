@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Container, Button } from "@mui/material";
-import Balance from "../Balance/balance";
 import Portfolio from "../Portfolio/portfolio";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
 import s from "./main.module.scss";
