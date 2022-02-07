@@ -11,23 +11,23 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import classNames from "classnames";
 
 const ItemList = ({ item }) => {
   if (!item) return null;
 
   const capFormatter = new Intl.NumberFormat("de-DE");
+  const priceFormatter = new Intl.NumberFormat("de-DE", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  const percentageFormatter = new Intl.NumberFormat("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
-  const priceFormatter = (digit) => {
-    if (digit === 1) {
-      return digit + ",00 $";
-    } else {
-      const formatter = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "USD",
-      });
-      return formatter.format(digit);
-    }
-  };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,
@@ -48,6 +48,14 @@ const ItemList = ({ item }) => {
     },
   }));
 
+  const priceChangeClass = () => {
+    if (item.price_change_percentage_24h > 0) {
+      return [s.percentagePlus, s.price_change_percentage_24h];
+    } else {
+      return [s.percentageMinus, s.price_change_percentage_24h];
+    }
+  };
+
   return (
     <TableBody>
       <StyledTableRow className={s.row}>
@@ -62,17 +70,30 @@ const ItemList = ({ item }) => {
           <img src={item.image} className={s.img}></img>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" sx={{ fontWeight: "medium" }}>
+          <Typography
+            align="center"
+            fontWeight={500}
+            sx={{ fontWeight: "medium" }}
+          >
             {item.name}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" className={s.price}>
-            {priceFormatter(item.current_price)}
+          <Typography align="center" fontWeight={500} className={s.price}>
+            {priceFormatter.format(item.current_price)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" className={s.marketCap}>
+          <Typography
+            align="center"
+            fontWeight={500}
+            className={priceChangeClass()}
+          >
+            {percentageFormatter.format(item.price_change_percentage_24h)}
+          </Typography>
+        </StyledTableCell>
+        <StyledTableCell>
+          <Typography align="center" fontWeight={500} className={s.marketCap}>
             {capFormatter.format(item.market_cap)}
           </Typography>
         </StyledTableCell>

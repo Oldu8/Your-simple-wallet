@@ -1,10 +1,16 @@
 .wrap {
   height: 120px;
-  background-color: rgb(190, 234, 251);
   font-size: 25px;
   font-weight: bold;
 }
 
 .balance {
   font-size: 45px;
+}
+
+.percentageMinus {
+  color: red;
+}
+.percentagePlus {
+  color: green;
 }

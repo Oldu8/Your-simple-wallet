@@ -12,7 +12,16 @@ td {
   font-weight: 600;
   content: "$";
   position: absolute;
-  right: 28%;
+  right: 20%;
+}
+
+.price_change_percentage_24h {
+  // font-weight: 600;
+  &::after {
+    content: "%";
+    position: absolute;
+    right: 39%;
+  }
 }
 
 .row {
@@ -25,4 +34,11 @@ td {
 .img {
   width: 30px;
   height: 30px;
+}
+
+.percentageMinus {
+  color: red;
+}
+.percentagePlus {
+  color: green;
 }

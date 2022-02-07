@@ -59,10 +59,21 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="center">Rank</StyledTableCell>
-              <StyledTableCell align="center">Icon</StyledTableCell>
-              <StyledTableCell align="center">Name</StyledTableCell>
-              <StyledTableCell align="center">Price</StyledTableCell>
+              <StyledTableCell align="center" fontWeight={500}>
+                Rank
+              </StyledTableCell>
+              <StyledTableCell align="center" fontWeight={500}>
+                Icon
+              </StyledTableCell>
+              <StyledTableCell align="center" fontWeight={500}>
+                Name
+              </StyledTableCell>
+              <StyledTableCell align="center" fontWeight={500}>
+                Price
+              </StyledTableCell>{" "}
+              <StyledTableCell align="center" fontWeight={500}>
+                Price change percentage
+              </StyledTableCell>
               <StyledTableCell align="center">Market Cap</StyledTableCell>
             </TableRow>
           </TableHead>
