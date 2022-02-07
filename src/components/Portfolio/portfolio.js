@@ -1,7 +1,7 @@
 import { Container, Button } from "@mui/material";
 import Balance from "../Balance/balance";
 import s from "./portfolio.module.scss";
-
+import ListOfCoins from "../ListOfCoins/ListOfCoins";
 const Portfolio = () => {
   return (
     <section>
@@ -19,7 +19,7 @@ const Portfolio = () => {
           Add new coin
         </Button>
       </Container>
-      <div className={s.main}></div>
+      <ListOfCoins></ListOfCoins>
     </section>
   );
 };

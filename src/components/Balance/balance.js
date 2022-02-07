@@ -28,10 +28,20 @@ const Balance = () => {
       <Typography variant="h4" mt={1}>
         Your balance:
       </Typography>
-      <span className={s.balance}>7777$</span>
-      <span className={priceChangeClass()}>
+      <Typography
+        variant="span"
+        sx={{ color: "rgb(61, 56, 56)" }}
+        className={s.balance}
+      >
+        {priceFormatter.format(7777)}
+      </Typography>
+      <Typography
+        variant="span"
+        sx={{ color: "rgb(61, 56, 56)" }}
+        className={s.percentage}
+      >
         {percentageFormatter.format(0.666)}
-      </span>
+      </Typography>
     </Container>
   );
 };

@@ -5,11 +5,15 @@
 }
 
 .balance {
-  font-size: 45px;
+  padding-right: 25px;
 }
-
+.percentage {
+  font-size: 20px;
+  color: green;
+}
 .percentageMinus {
   color: red;
+  // color: rgb(61, 56, 56);
 }
 .percentagePlus {
   color: green;
