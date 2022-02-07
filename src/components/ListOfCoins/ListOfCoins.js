@@ -80,7 +80,6 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
           {topCoins.map((coin) => (
             <ItemList item={coin} key={coin.symbol} />
           ))}
-          <ItemList />
         </Table>
       </TableContainer>
       <Container
