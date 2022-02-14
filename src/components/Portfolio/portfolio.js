@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Button,
@@ -15,6 +15,7 @@ import Balance from "../Balance/balance";
 import s from "./portfolio.module.scss";
 import ItemList from "../ItemList/ItemList";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 const Portfolio = () => {
   // useEffect(() => {
@@ -31,6 +32,10 @@ const Portfolio = () => {
     },
   }));
 
+  const [isModal, setModal] = useState(false);
+  const modalOpen = () => setModal(true);
+  const modalClose = () => setModal(false);
+
   return (
     <section>
       <Container
@@ -43,9 +48,10 @@ const Portfolio = () => {
         }}
       >
         <Balance></Balance>
-        <Button variant="contained" size="large">
+        <Button variant="contained" size="large" onClick={modalOpen}>
           Add new coin
         </Button>
+        <ModalWindow isModal={isModal} modalClose={modalClose} />
       </Container>
 
       <section className={s.wrap}>
@@ -63,12 +69,17 @@ const Portfolio = () => {
                   Name
                 </StyledTableCell>
                 <StyledTableCell align="center" fontWeight={500}>
-                  Price
-                </StyledTableCell>{" "}
-                <StyledTableCell align="center" fontWeight={500}>
-                  Price change percentage
+                  Holdings
                 </StyledTableCell>
-                <StyledTableCell align="center">Market Cap</StyledTableCell>
+                <StyledTableCell align="center" fontWeight={500}>
+                  Buy price
+                </StyledTableCell>
+                <StyledTableCell align="center" fontWeight={500}>
+                  Current Price
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  Profit and Loss
+                </StyledTableCell>
               </TableRow>
             </TableHead>
           </Table>
