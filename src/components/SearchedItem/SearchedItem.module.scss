@@ -1,0 +1,24 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding-left: 10px;
+}
+.img {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+}
+
+.coinName {
+  font-weight: 500;
+  font-size: 17px;
+  text-transform: capitalize;
+}
+
+.nameBox {
+  display: flex;
+  align-items: center;
+}

@@ -19,11 +19,11 @@ import {
   Pagination,
 } from "@mui/material";
 
-import getCoins from "../getCoins";
+import getListOfCoins from "../getListOfCoins";
 
 const ListOfCoins = ({ topCoins, downloadCoins }) => {
   const getCoinsList = async (page) => {
-    const result = await getCoins(page);
+    const result = await getListOfCoins(page);
     downloadCoins(result);
   };
 
