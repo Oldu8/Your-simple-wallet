@@ -14,13 +14,43 @@ import SearchedItem from "../SearchedItem/SearchedItem";
 
 const ModalWindow = ({ isModal, modalClose }) => {
   const [query, setQuery] = useState("");
-  const [coinsArr, setCoinsArr] = useState("");
+  const [coinsArr, setCoinsArr] = useState([]);
+
+  // Vot ety shlyapy nado prikrytit` 4to bi zaprosi yhodili celie a ne po bykve //
+  // function debounce(func, timeout = 300) {
+  //   let timer;
+  //   return (...args) => {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       func.apply(this, args);
+  //     }, timeout);
+  //   };
+  // }
+  // function saveInput(query) {
+  //   console.log("search for coin: " + query);
+  // }
+  // const processChange = debounce(() => setQuery(query));
 
   const searchedCoin = async (query) => {
     const result = await getCoin(query);
-    const first10Coins = result.splice(0, 7);
-    setCoinsArr(first10Coins);
-    console.log(first10Coins);
+    const res = await result.json();
+
+    if (result.ok && result.status === 200) {
+      if (Array.isArray(res)) {
+        // console.log(res);
+        const first7Coins = res.splice(0, 7);
+        // console.log(first7Coins);
+
+        setCoinsArr(first7Coins);
+        return;
+      } else {
+        // console.log(res);
+        setCoinsArr([res]);
+        // coinsArr.push(res);
+        return;
+      }
+    }
+    return null;
   };
 
   useEffect(() => {
