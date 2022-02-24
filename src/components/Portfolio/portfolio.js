@@ -13,15 +13,14 @@ import {
 } from "@mui/material";
 import Balance from "../Balance/balance";
 import s from "./portfolio.module.scss";
-import ItemList from "../ItemList/ItemList";
-import ListOfCoins from "../ListOfCoins/ListOfCoins";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import { useSelector } from "react-redux";
+import PortfolioItem from "../PortfolioItem/portfolioItem";
+import { getPortfolioCoins } from "./selectors";
 
 const Portfolio = () => {
-  // useEffect(() => {
-  //   getCoinsList(page);
-  // }, [page]);
-
+  const portfolioArr = useSelector(getPortfolioCoins);
+  debugger;
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,
@@ -41,10 +40,7 @@ const Portfolio = () => {
       <Container
         className={s.header}
         sx={{
-          bgcolor: "#e2e9eb",
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
       >
         <Balance></Balance>
@@ -53,7 +49,6 @@ const Portfolio = () => {
         </Button>
         <ModalWindow isModal={isModal} modalClose={modalClose} />
       </Container>
-
       <section className={s.wrap}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -82,6 +77,9 @@ const Portfolio = () => {
                 </StyledTableCell>
               </TableRow>
             </TableHead>
+            {portfolioArr.map((item, index) => (
+              <PortfolioItem item={item} key={index} />
+            ))}
           </Table>
         </TableContainer>
       </section>

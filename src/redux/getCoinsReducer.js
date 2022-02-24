@@ -2,6 +2,7 @@ import { DOWNLOAD_COINS, REMOVE_COINS } from "./types";
 
 const initialState = {
   coins: [],
+  isFetching: true,
 };
 
 export const getCoinsReducer = (state = initialState, action) => {
