@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@mui/material";
 import s from "./SearchedItem.module.scss";
-import { useDispatch } from "react-redux";
-import { addCoinToPortfolio } from "../../redux/actions";
+import CoinOptionBlock from "../CoinOptionBlock/CoinOptionBlock";
 
 const SearchedItem = ({ item }) => {
-  const dispatch = useDispatch();
+  const [isOptionBlock, setOptionBlock] = useState(false);
 
-  const addCoin = (item) => {
-    console.log(item);
-    dispatch(addCoinToPortfolio(item));
+  const handleOptionBlock = () => {
+    !isOptionBlock ? setOptionBlock(true) : setOptionBlock(false);
   };
 
   const btnStyle = {
@@ -19,15 +17,22 @@ const SearchedItem = ({ item }) => {
   };
   if (!item) return null;
   return (
-    <div className={s.item} key={item.id}>
-      <div className={s.nameBox}>
-        <img src={item.image.small} className={s.img} alt={item.id} />
-        <p className={s.coinName}>{item.id}</p>
+    <section>
+      <div className={s.item} key={item.id}>
+        <div className={s.nameBox}>
+          <img src={item.image.small} className={s.img} alt={item.id} />
+          <p className={s.coinName}>{item.id}</p>
+        </div>
+        <Button
+          variant="contained"
+          sx={btnStyle}
+          onClick={() => handleOptionBlock()}
+        >
+          +
+        </Button>
       </div>
-      <Button variant="contained" sx={btnStyle} onClick={() => addCoin(item)}>
-        +
-      </Button>
-    </div>
+      {isOptionBlock ? <CoinOptionBlock item={item} /> : null}
+    </section>
   );
 };
 

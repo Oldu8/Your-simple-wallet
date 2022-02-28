@@ -20,7 +20,6 @@ import { getPortfolioCoins } from "./selectors";
 
 const Portfolio = () => {
   const portfolioArr = useSelector(getPortfolioCoins);
-  debugger;
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,

@@ -15,12 +15,14 @@ const PortfolioItem = ({ item }) => {
   if (!item) return null;
 
   const capFormatter = new Intl.NumberFormat("de-DE");
+
   const priceFormatter = new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+
   const percentageFormatter = new Intl.NumberFormat("de-DE", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -40,7 +42,6 @@ const PortfolioItem = ({ item }) => {
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     "&:last-child td, &:last-child th": {
       border: 0,
     },
@@ -79,22 +80,22 @@ const PortfolioItem = ({ item }) => {
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500} className={s.price}>
-            Holdings
+          <Typography align="center" fontWeight={500}>
+            {percentageFormatter.format(item.queryQuantity)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500} className={s.price}>
-            Buy price
+          <Typography align="center" fontWeight={500}>
+            {priceFormatter.format(item.queryPrice)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500} className={s.price}>
+          <Typography align="center" fontWeight={500}>
             {priceFormatter.format(item.market_data.current_price.usd)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500} className={s.price}>
+          <Typography align="center" fontWeight={500}>
             Profit
           </Typography>
         </StyledTableCell>

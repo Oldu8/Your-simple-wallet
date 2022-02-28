@@ -37,16 +37,11 @@ const ModalWindow = ({ isModal, modalClose }) => {
 
     if (result.ok && result.status === 200) {
       if (Array.isArray(res)) {
-        // console.log(res);
-        const first7Coins = res.splice(0, 7);
-        // console.log(first7Coins);
-
-        setCoinsArr(first7Coins);
+        const first6Coins = res.splice(0, 6);
+        setCoinsArr(first6Coins);
         return;
       } else {
-        // console.log(res);
         setCoinsArr([res]);
-        // coinsArr.push(res);
         return;
       }
     }
