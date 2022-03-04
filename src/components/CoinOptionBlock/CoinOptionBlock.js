@@ -17,7 +17,6 @@ const CoinOptionBlock = (item) => {
 
   return (
     <Container className={s.wrap} sx={{ display: "flex" }}>
-      {/* <Typography>Coin Info</Typography> */}
       <div className={s.block}>
         <TextField
           id="standard-basic"
