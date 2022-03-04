@@ -3,13 +3,7 @@ import { Button } from "@mui/material";
 import s from "./SearchedItem.module.scss";
 import CoinOptionBlock from "../CoinOptionBlock/CoinOptionBlock";
 
-const SearchedItem = ({ item }) => {
-  const [isOptionBlock, setOptionBlock] = useState(false);
-
-  const handleOptionBlock = () => {
-    !isOptionBlock ? setOptionBlock(true) : setOptionBlock(false);
-  };
-
+const SearchedItem = ({ item, openedID, setOpen }) => {
   const btnStyle = {
     p: 0,
     minWidth: 40,
@@ -26,12 +20,12 @@ const SearchedItem = ({ item }) => {
         <Button
           variant="contained"
           sx={btnStyle}
-          onClick={() => handleOptionBlock()}
+          onClick={() => setOpen(item.id)}
         >
           +
         </Button>
       </div>
-      {isOptionBlock ? <CoinOptionBlock item={item} /> : null}
+      {openedID === item.id ? <CoinOptionBlock item={item} /> : null}
     </section>
   );
 };

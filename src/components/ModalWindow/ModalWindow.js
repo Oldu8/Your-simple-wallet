@@ -15,6 +15,13 @@ import SearchedItem from "../SearchedItem/SearchedItem";
 const ModalWindow = ({ isModal, modalClose }) => {
   const [query, setQuery] = useState("");
   const [coinsArr, setCoinsArr] = useState([]);
+  const [openedID, setOpenedId] = useState(null);
+
+  const handleChange = (id) => {
+    setOpenedId((prevId) => {
+      return prevId === id ? null : id;
+    });
+  };
 
   // Vot ety shlyapy nado prikrytit` 4to bi zaprosi yhodili celie a ne po bykve //
   // function debounce(func, timeout = 300) {
@@ -103,7 +110,11 @@ const ModalWindow = ({ isModal, modalClose }) => {
           />
           <div className={s.list}>
             {coinsArr.map((item) => (
-              <SearchedItem item={item} />
+              <SearchedItem
+                item={item}
+                openedID={openedID}
+                setOpen={handleChange}
+              />
             ))}
           </div>
         </Container>
