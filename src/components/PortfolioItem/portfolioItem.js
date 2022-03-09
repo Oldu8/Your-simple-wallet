@@ -10,11 +10,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import classNames from "classnames";
+import { profitFunc } from "./profitFunc";
 
 const PortfolioItem = ({ item }) => {
   if (!item) return null;
-
-  const capFormatter = new Intl.NumberFormat("de-DE");
 
   const priceFormatter = new Intl.NumberFormat("de-DE", {
     style: "currency",
@@ -47,8 +46,14 @@ const PortfolioItem = ({ item }) => {
     },
   }));
 
+  const coinPnL = profitFunc(
+    item.queryPrice,
+    item.queryQuantity,
+    item.market_data.current_price.usd
+  );
+
   const priceChangeClass = () => {
-    if (item.price_change_percentage_24h > 0) {
+    if (coinPnL > 0) {
       return [s.percentagePlus, s.price_change_percentage_24h];
     } else {
       return [s.percentageMinus, s.price_change_percentage_24h];
@@ -95,8 +100,12 @@ const PortfolioItem = ({ item }) => {
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            Profit
+          <Typography
+            align="center"
+            fontWeight={500}
+            className={priceChangeClass()}
+          >
+            {priceFormatter.format(coinPnL)}
           </Typography>
         </StyledTableCell>
       </StyledTableRow>

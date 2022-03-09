@@ -70,7 +70,7 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
               </StyledTableCell>
               <StyledTableCell align="center" fontWeight={500}>
                 Price
-              </StyledTableCell>{" "}
+              </StyledTableCell>
               <StyledTableCell align="center" fontWeight={500}>
                 Price change percentage
               </StyledTableCell>
