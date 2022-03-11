@@ -4,3 +4,14 @@
 .percentagePlus {
   color: green;
 }
+.row {
+  position: relative;
+}
+
+.trashIcon {
+  opacity: 0.4;
+  position: absolute;
+  top: 50%;
+  right: 1.5%;
+  transform: translateY(-50%);
+}

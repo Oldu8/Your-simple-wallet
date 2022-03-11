@@ -11,10 +11,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import classNames from "classnames";
 import { profitFunc } from "./profitFunc";
+import TrashIcon from "../../assets/trashIcon";
+import { useDispatch } from "react-redux";
+import { deleteCoinFromPortfolio } from "../../redux/actions";
 
 const PortfolioItem = ({ item }) => {
-  if (!item) return null;
-
   const priceFormatter = new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "USD",
@@ -54,24 +55,22 @@ const PortfolioItem = ({ item }) => {
 
   const priceChangeClass = () => {
     if (coinPnL > 0) {
-      return [s.percentagePlus, s.price_change_percentage_24h];
+      return s.percentagePlus;
     } else {
-      return [s.percentageMinus, s.price_change_percentage_24h];
+      return s.percentageMinus;
     }
+  };
+
+  const dispatch = useDispatch();
+
+  const deleteCoin = (item) => {
+    console.log(item);
+    dispatch(deleteCoinFromPortfolio(item));
   };
 
   return (
     <TableBody>
       <StyledTableRow className={s.row}>
-        <StyledTableCell
-          align="center"
-          className={s.rank}
-          sx={{ fontWeight: "medium" }}
-        >
-          <Typography align="center">
-            {item.market_data.market_cap_rank}
-          </Typography>
-        </StyledTableCell>
         <StyledTableCell align="center">
           <img src={item.image.small} className={s.img}></img>
         </StyledTableCell>
@@ -108,6 +107,9 @@ const PortfolioItem = ({ item }) => {
             {priceFormatter.format(coinPnL)}
           </Typography>
         </StyledTableCell>
+        <div className={s.trashIcon} onClick={() => deleteCoin(item)}>
+          <TrashIcon />
+        </div>
       </StyledTableRow>
     </TableBody>
   );

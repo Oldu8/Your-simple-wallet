@@ -54,9 +54,6 @@ const Portfolio = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell align="center" fontWeight={500}>
-                  Rank
-                </StyledTableCell>
-                <StyledTableCell align="center" fontWeight={500}>
                   Icon
                 </StyledTableCell>
                 <StyledTableCell align="center" fontWeight={500}>
@@ -76,9 +73,11 @@ const Portfolio = () => {
                 </StyledTableCell>
               </TableRow>
             </TableHead>
-            {portfolioArr.map((item, index) => (
-              <PortfolioItem item={item} key={index} />
-            ))}
+            {portfolioArr
+              ? portfolioArr.map((item, index) => (
+                  <PortfolioItem item={item} key={index} />
+                ))
+              : null}
           </Table>
         </TableContainer>
       </section>

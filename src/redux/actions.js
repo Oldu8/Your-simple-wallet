@@ -1,4 +1,4 @@
-import { DOWNLOAD_COINS, REMOVE_COINS, ADD_COIN } from "./types";
+import { DOWNLOAD_COINS, REMOVE_COINS, ADD_COIN, DELETE_COIN } from "./types";
 
 export function downloadCoins(data) {
   return {
@@ -10,6 +10,13 @@ export function downloadCoins(data) {
 export function removeCoins() {
   return {
     type: REMOVE_COINS,
+  };
+}
+
+export function deleteCoinFromPortfolio(data) {
+  return {
+    type: DELETE_COIN,
+    payload: data,
   };
 }
 

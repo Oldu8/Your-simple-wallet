@@ -1,4 +1,4 @@
-import { ADD_COIN } from "./types";
+import { ADD_COIN, DELETE_COIN } from "./types";
 
 const initialState = {
   portfolioCoins: [],
@@ -34,6 +34,22 @@ export const addCoinReducer = (state = initialState, action) => {
         ...state,
         portfolioCoins: [...state.portfolioCoins, action.payload],
       };
+    case DELETE_COIN:
+      console.log(action);
+      console.log(state);
+      const idxToRemove = state.portfolioCoins.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      console.log(idxToRemove);
+      const before = state.portfolioCoins.slice(0, idxToRemove);
+      const after = state.portfolioCoins.slice(idxToRemove + 1);
+      const newPortfolioCoins = [...before, ...after];
+
+      return {
+        ...state,
+        portfolioCoins: newPortfolioCoins,
+      };
+
     default:
       return state;
   }
