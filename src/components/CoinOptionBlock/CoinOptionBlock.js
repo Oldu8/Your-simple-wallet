@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from "./CoinOptionBlock.module.scss";
-import { Container, Typography, Box, TextField, Button } from "@mui/material";
-import { addCoinToPortfolio } from "../../redux/actions";
+import { Container, TextField, Button } from "@mui/material";
+import { addCoinToPortfolio } from "../../redux-toolkit/addCoinSlice";
 import { useDispatch } from "react-redux";
 
 const CoinOptionBlock = (item) => {

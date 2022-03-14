@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import {
   Container,
   Button,
@@ -14,12 +16,11 @@ import {
 import Balance from "../Balance/balance";
 import s from "./portfolio.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { useSelector } from "react-redux";
 import PortfolioItem from "../PortfolioItem/portfolioItem";
-import { getPortfolioCoins } from "./selectors";
 
 const Portfolio = () => {
-  const portfolioArr = useSelector(getPortfolioCoins);
+  const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,
@@ -73,8 +74,8 @@ const Portfolio = () => {
                 </StyledTableCell>
               </TableRow>
             </TableHead>
-            {portfolioArr
-              ? portfolioArr.map((item, index) => (
+            {portfolioCoins
+              ? portfolioCoins.map((item, index) => (
                   <PortfolioItem item={item} key={index} />
                 ))
               : null}

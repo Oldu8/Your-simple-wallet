@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useSelector, useDispatch } from "react-redux";
-import { getCoins } from "../../redux-toolkit/slice";
+import { getCoins } from "../../redux-toolkit/getTopCoinsSlice";
 import s from "./ListOfCoins.module.scss";
-// import classNames from "classnames";
 import {
   Typography,
   styled,
