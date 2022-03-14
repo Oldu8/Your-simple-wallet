@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
-import { connect } from "react-redux";
-import { downloadCoins } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { getCoins } from "../../redux-toolkit/slice";
 import s from "./ListOfCoins.module.scss";
 // import classNames from "classnames";
 import {
@@ -21,10 +21,12 @@ import {
 
 import getListOfCoins from "../getListOfCoins";
 
-const ListOfCoins = ({ topCoins, downloadCoins }) => {
+const ListOfCoins = () => {
+  const dispatch = useDispatch();
+  const { coins } = useSelector((state) => state.coins);
   const getCoinsList = async (page) => {
     const result = await getListOfCoins(page);
-    downloadCoins(result);
+    dispatch(getCoins(result));
   };
 
   const [page, setPage] = useState(1);
@@ -77,7 +79,7 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
               <StyledTableCell align="center">Market Cap</StyledTableCell>
             </TableRow>
           </TableHead>
-          {topCoins.map((coin) => (
+          {coins.map((coin) => (
             <ItemList item={coin} key={coin.symbol} />
           ))}
         </Table>
@@ -103,21 +105,4 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    topCoins: state.coins.coins,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  // return { downloadCoins: (data) => dispatch(downloadCoins(data)) };
-  return {
-    downloadCoins: (data) => {
-      dispatch({ type: "DOWNLOAD_COINS", payload: data });
-    },
-    // removeCoins: () => {
-    //   dispatch(removeCoins());
-    // },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ListOfCoins);
+export default ListOfCoins;

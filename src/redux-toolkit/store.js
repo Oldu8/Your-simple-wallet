@@ -1,18 +1,27 @@
-// import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 // import getCoinsReducer from "./slice";
+import { combineReducers } from "redux";
+// import { getCoinsReducer } from "../redux/getCoinsReducer"; obi4nie redux
+import getCoinsReducer from "./slice";
+import { addCoinReducer } from "../redux/addCoinReducer";
 
-// const middleware = getDefaultMiddleware({
-//   immutableCheck: false,
-//   serializableCheck: false,
-//   thunk: true,
-// });
+export const rootReducer = combineReducers({
+  coins: getCoinsReducer,
+  portfolioCoins: addCoinReducer,
+});
 
-// const store = configureStore({
-//   reducer: {
-//     topCoins: getCoinsReducer,
-//   },
-//   middleware,
-//   devTools: process.env.NODE_ENV !== "production",
-// });
+const middleware = getDefaultMiddleware({
+  immutableCheck: false,
+  serializableCheck: false,
+  thunk: true,
+});
 
-// export default store;
+const store = configureStore({
+  reducer: {
+    coins: getCoinsReducer,
+  },
+  middleware,
+  devTools: process.env.NODE_ENV !== "production",
+});
+
+export default store;
