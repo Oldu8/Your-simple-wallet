@@ -6,13 +6,6 @@ import ListOfCoins from "../ListOfCoins/ListOfCoins";
 import s from "./main.module.scss";
 
 const Main = () => {
-  const clickOnCoins = () => {
-    console.log("open top 10 coins");
-  };
-  const clickOnPortfolio = () => {
-    console.log("open portfolio");
-  };
-
   return (
     <section className={s.wrap}>
       <div className={s.switchBlock}>
@@ -21,7 +14,6 @@ const Main = () => {
           size="large"
           sx={{ borderRadius: 3 }}
           className={s.switchBtn}
-          onClick={clickOnCoins}
         >
           <Link to="/"> Top 10 coins</Link>
         </Button>
@@ -30,7 +22,6 @@ const Main = () => {
           size="large"
           sx={{ borderRadius: 3 }}
           className={s.switchBtn}
-          onClick={clickOnPortfolio}
         >
           <Link to="/portfolio"> My portfolio</Link>
         </Button>
