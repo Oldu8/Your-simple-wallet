@@ -2,28 +2,6 @@ td {
   position: relative;
 }
 
-// .price::before {
-//   content: "$";
-//   position: absolute;
-//   left: 28%;
-//   font-weight: 500;
-// }
-.marketCap::after {
-  font-weight: 600;
-  content: "$";
-  position: absolute;
-  right: 20%;
-}
-
-.price_change_percentage_24h {
-  // font-weight: 600;
-  &::after {
-    content: "%";
-    position: absolute;
-    right: 39%;
-  }
-}
-
 .row {
   text-align: center;
 }
@@ -38,7 +16,17 @@ td {
 
 .percentageMinus {
   color: red;
+  &::after {
+    content: "%";
+    position: absolute;
+    right: 39%;
+  }
 }
 .percentagePlus {
   color: green;
+  &::after {
+    content: "%";
+    position: absolute;
+    right: 39%;
+  }
 }

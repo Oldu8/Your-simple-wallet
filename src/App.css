@@ -4,3 +4,8 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.App {
+  background: radial-gradient(at bottom, #a9bdd4, #073146);
+  height: 100vh;
+}

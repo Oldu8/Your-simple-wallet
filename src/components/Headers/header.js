@@ -5,7 +5,7 @@ import s from "./header.module.scss";
 
 const Header = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={s.header}>
       <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
         <Typography variant="h4" align="center">
           Welcome to your friendly crypto wallet
