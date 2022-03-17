@@ -22,6 +22,7 @@ const ItemList = ({ item }) => {
     maximumFractionDigits: 2,
   });
   const percentageFormatter = new Intl.NumberFormat("de-DE", {
+    style: "percent",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -86,7 +87,7 @@ const ItemList = ({ item }) => {
             fontWeight={500}
             className={priceChangeClass()}
           >
-            {percentageFormatter.format(item.price_change_percentage_24h)}
+            {percentageFormatter.format(item.price_change_percentage_24h / 100)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>

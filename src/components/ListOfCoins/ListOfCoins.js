@@ -51,7 +51,6 @@ const ListOfCoins = () => {
         align="center"
         color="primary.dark"
         sx={{ fontWeight: "medium" }}
-        className="header"
       >
         List of coins:
       </Typography>

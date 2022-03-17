@@ -16,17 +16,7 @@ td {
 
 .percentageMinus {
   color: red;
-  &::after {
-    content: "%";
-    position: absolute;
-    right: 39%;
-  }
 }
 .percentagePlus {
   color: green;
-  &::after {
-    content: "%";
-    position: absolute;
-    right: 39%;
-  }
 }

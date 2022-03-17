@@ -7,5 +7,8 @@
 
 .App {
   background: radial-gradient(at bottom, #a9bdd4, #073146);
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  @media screen and (max-width: 1024px) {
+  }
 }
