@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
-import { connect } from "react-redux";
-import { downloadCoins } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { getCoins } from "../../redux-toolkit/getTopCoinsSlice";
 import s from "./ListOfCoins.module.scss";
-// import classNames from "classnames";
 import {
   Typography,
   styled,
@@ -21,10 +20,12 @@ import {
 
 import getListOfCoins from "../getListOfCoins";
 
-const ListOfCoins = ({ topCoins, downloadCoins }) => {
+const ListOfCoins = () => {
+  const dispatch = useDispatch();
+  const { coins } = useSelector((state) => state.coins);
   const getCoinsList = async (page) => {
     const result = await getListOfCoins(page);
-    downloadCoins(result);
+    dispatch(getCoins(result));
   };
 
   const [page, setPage] = useState(1);
@@ -36,21 +37,30 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,
+
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+    },
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 1,
+      paddingBottom: 2,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+      lineHeight: "1 rem",
+      paddingBottom: 0,
     },
   }));
 
   return (
     <section className={s.wrap}>
       <Typography
-        variant="h2"
+        variant="h3"
         align="center"
         color="primary.dark"
         sx={{ fontWeight: "medium" }}
-        className="header"
       >
         List of coins:
       </Typography>
@@ -77,14 +87,15 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
               <StyledTableCell align="center">Market Cap</StyledTableCell>
             </TableRow>
           </TableHead>
-          {topCoins.map((coin) => (
+          {coins.map((coin) => (
             <ItemList item={coin} key={coin.symbol} />
           ))}
         </Table>
       </TableContainer>
       <Container
         sx={{
-          pt: 3,
+          p: 0,
+          pt: 2,
           pb: 2,
           display: "flex",
           justifyContent: "center",
@@ -103,21 +114,4 @@ const ListOfCoins = ({ topCoins, downloadCoins }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    topCoins: state.coins.coins,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  // return { downloadCoins: (data) => dispatch(downloadCoins(data)) };
-  return {
-    downloadCoins: (data) => {
-      dispatch({ type: "DOWNLOAD_COINS", payload: data });
-    },
-    // removeCoins: () => {
-    //   dispatch(removeCoins());
-    // },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ListOfCoins);
+export default ListOfCoins;

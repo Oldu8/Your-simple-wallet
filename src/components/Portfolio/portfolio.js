@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import {
   Container,
   Button,
@@ -14,12 +16,11 @@ import {
 import Balance from "../Balance/balance";
 import s from "./portfolio.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { useSelector } from "react-redux";
 import PortfolioItem from "../PortfolioItem/portfolioItem";
-import { getPortfolioCoins } from "./selectors";
 
 const Portfolio = () => {
-  const portfolioArr = useSelector(getPortfolioCoins);
+  const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,
@@ -27,6 +28,15 @@ const Portfolio = () => {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+    },
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 1,
+      paddingBottom: 2,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+      lineHeight: "1 rem",
+      paddingBottom: 0,
     },
   }));
 
@@ -42,8 +52,8 @@ const Portfolio = () => {
           display: "flex",
         }}
       >
-        <Balance></Balance>
-        <Button variant="contained" size="large" onClick={modalOpen}>
+        <Balance />
+        <Button variant="contained" size="medium" onClick={modalOpen}>
           Add new coin
         </Button>
         <ModalWindow isModal={isModal} modalClose={modalClose} />
@@ -73,8 +83,8 @@ const Portfolio = () => {
                 </StyledTableCell>
               </TableRow>
             </TableHead>
-            {portfolioArr
-              ? portfolioArr.map((item, index) => (
+            {portfolioCoins
+              ? portfolioCoins.map((item, index) => (
                   <PortfolioItem item={item} key={index} />
                 ))
               : null}

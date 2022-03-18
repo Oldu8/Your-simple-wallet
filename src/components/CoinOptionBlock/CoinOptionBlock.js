@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import s from "./CoinOptionBlock.module.scss";
-import { Container, Typography, Box, TextField, Button } from "@mui/material";
-import { addCoinToPortfolio } from "../../redux/actions";
+import { Container, TextField, Button } from "@mui/material";
+import { addCoinToPortfolio } from "../../redux-toolkit/addCoinSlice";
 import { useDispatch } from "react-redux";
 
 const CoinOptionBlock = (item) => {
-  const [queryQuantity, setQueryQuantity] = useState("");
-  const [queryPrice, setQueryPrice] = useState("");
+  const inititalState = "";
+  const [queryQuantity, setQueryQuantity] = useState(inititalState);
+  const [queryPrice, setQueryPrice] = useState(inititalState);
 
   const dispatch = useDispatch();
 
   const addCoin = ({ item }) => {
     const coinInfo = { ...item, queryPrice, queryQuantity };
     dispatch(addCoinToPortfolio(coinInfo));
+    setQueryPrice(inititalState);
+    setQueryQuantity(inititalState);
   };
 
   return (
@@ -41,6 +44,7 @@ const CoinOptionBlock = (item) => {
         size="small"
         className={s.button}
         onClick={() => addCoin(item)}
+        disabled={queryQuantity && queryPrice ? null : true}
       >
         Add
       </Button>

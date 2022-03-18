@@ -1,16 +1,15 @@
-import { ADD_COIN, DELETE_COIN } from "./types";
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  portfolioCoins: [],
-};
-
-export const addCoinReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_COIN:
+export const addCoinsSlice = createSlice({
+  name: "PORTFOLIO_COINS",
+  initialState: {
+    portfolioCoins: [],
+  },
+  reducers: {
+    addCoinToPortfolio(state, action) {
       const sameCoin = state.portfolioCoins.find(
         (item) => item.id === action.payload.id
       );
-
       if (sameCoin) {
         const newPortfolioCoins = state.portfolioCoins.filter(
           (item) => item.id !== action.payload.id
@@ -25,32 +24,27 @@ export const addCoinReducer = (state = initialState, action) => {
           Number(sameCoin.queryQuantity) * Number(sameCoin.queryPrice);
 
         newSameCoin.queryPrice = totalSum / newSameCoin.queryQuantity;
-        return {
-          ...state,
-          portfolioCoins: [...newPortfolioCoins, newSameCoin],
-        };
+        state.portfolioCoins = [...newPortfolioCoins, newSameCoin];
       }
       return {
         ...state,
         portfolioCoins: [...state.portfolioCoins, action.payload],
       };
-    case DELETE_COIN:
-      console.log(action);
-      console.log(state);
+    },
+    removeCoin(state, action) {
       const idxToRemove = state.portfolioCoins.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log(idxToRemove);
       const before = state.portfolioCoins.slice(0, idxToRemove);
       const after = state.portfolioCoins.slice(idxToRemove + 1);
       const newPortfolioCoins = [...before, ...after];
 
-      return {
-        ...state,
-        portfolioCoins: newPortfolioCoins,
-      };
+      {
+        state.portfolioCoins = newPortfolioCoins;
+      }
+    },
+  },
+});
 
-    default:
-      return state;
-  }
-};
+export const { addCoinToPortfolio, removeCoin } = addCoinsSlice.actions;
+export default addCoinsSlice.reducer;

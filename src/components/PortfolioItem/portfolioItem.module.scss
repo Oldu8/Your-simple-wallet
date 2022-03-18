@@ -14,4 +14,7 @@
   top: 50%;
   right: 1.5%;
   transform: translateY(-50%);
+  @media screen and (max-width: 768px) {
+    right: 0%;
+  }
 }

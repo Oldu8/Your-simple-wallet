@@ -1,18 +1,34 @@
-// import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-// import getCoinsReducer from "./slice";
+import {
+  configureStore,
+  combineReducers,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
+import getCoinsReducer from "./getTopCoinsSlice";
+import addCoinReducer from "./addCoinSlice";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-// const middleware = getDefaultMiddleware({
-//   immutableCheck: false,
-//   serializableCheck: false,
-//   thunk: true,
-// });
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const rootReducer = combineReducers({
+  coins: getCoinsReducer,
+  portfolioCoins: addCoinReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// const store = configureStore({
-//   reducer: {
-//     topCoins: getCoinsReducer,
-//   },
-//   middleware,
-//   devTools: process.env.NODE_ENV !== "production",
-// });
+const middleware = getDefaultMiddleware({
+  immutableCheck: false,
+  serializableCheck: false,
+  thunk: true,
+});
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware,
+  devTools: process.env.NODE_ENV !== "production",
+});
 
-// export default store;
+export const persistor = persistStore(store);
+
+export default store;

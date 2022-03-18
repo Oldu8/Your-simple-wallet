@@ -1,22 +1,20 @@
 import React from "react";
-// import { useSelector } from "react-redux";
 import s from "./ItemList.module.scss";
-// import { connect } from "react-redux";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import classNames from "classnames";
 
 const ItemList = ({ item }) => {
   if (!item) return null;
 
-  const capFormatter = new Intl.NumberFormat("de-DE");
+  const capFormatter = new Intl.NumberFormat("de-DE", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
   const priceFormatter = new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "USD",
@@ -24,6 +22,7 @@ const ItemList = ({ item }) => {
     maximumFractionDigits: 2,
   });
   const percentageFormatter = new Intl.NumberFormat("de-DE", {
+    style: "percent",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -42,7 +41,6 @@ const ItemList = ({ item }) => {
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     "&:last-child td, &:last-child th": {
       border: 0,
     },
@@ -50,9 +48,9 @@ const ItemList = ({ item }) => {
 
   const priceChangeClass = () => {
     if (item.price_change_percentage_24h > 0) {
-      return [s.percentagePlus, s.price_change_percentage_24h];
+      return s.percentagePlus;
     } else {
-      return [s.percentageMinus, s.price_change_percentage_24h];
+      return s.percentageMinus;
     }
   };
 
@@ -79,7 +77,7 @@ const ItemList = ({ item }) => {
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500} className={s.price}>
+          <Typography align="center" fontWeight={500}>
             {priceFormatter.format(item.current_price)}
           </Typography>
         </StyledTableCell>
@@ -89,11 +87,11 @@ const ItemList = ({ item }) => {
             fontWeight={500}
             className={priceChangeClass()}
           >
-            {percentageFormatter.format(item.price_change_percentage_24h)}
+            {percentageFormatter.format(item.price_change_percentage_24h / 100)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
-          <Typography align="center" fontWeight={500} className={s.marketCap}>
+          <Typography align="center" fontWeight={500}>
             {capFormatter.format(item.market_cap)}
           </Typography>
         </StyledTableCell>

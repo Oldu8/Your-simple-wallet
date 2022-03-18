@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import s from "./portfolioItem.module.scss";
-import { Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import classNames from "classnames";
+import {
+  Typography,
+  styled,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableRow,
+} from "@mui/material";
 import { profitFunc } from "./profitFunc";
 import TrashIcon from "../../assets/trashIcon";
 import { useDispatch } from "react-redux";
-import { deleteCoinFromPortfolio } from "../../redux/actions";
+import { removeCoin } from "../../redux-toolkit/addCoinSlice";
 
 const PortfolioItem = ({ item }) => {
   const priceFormatter = new Intl.NumberFormat("de-DE", {
@@ -35,6 +33,16 @@ const PortfolioItem = ({ item }) => {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+    },
+
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 1,
+      paddingBottom: 2,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0.5,
+      lineHeight: "1 rem",
+      paddingBottom: 1,
     },
   }));
 
@@ -64,54 +72,55 @@ const PortfolioItem = ({ item }) => {
   const dispatch = useDispatch();
 
   const deleteCoin = (item) => {
-    console.log(item);
-    dispatch(deleteCoinFromPortfolio(item));
+    dispatch(removeCoin(item));
   };
 
   return (
-    <TableBody>
-      <StyledTableRow className={s.row}>
-        <StyledTableCell align="center">
-          <img src={item.image.small} className={s.img}></img>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography
-            align="center"
-            fontWeight={500}
-            sx={{ fontWeight: "medium" }}
-          >
-            {item.name}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            {percentageFormatter.format(item.queryQuantity)}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            {priceFormatter.format(item.queryPrice)}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            {priceFormatter.format(item.market_data.current_price.usd)}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography
-            align="center"
-            fontWeight={500}
-            className={priceChangeClass()}
-          >
-            {priceFormatter.format(coinPnL)}
-          </Typography>
-        </StyledTableCell>
-        <div className={s.trashIcon} onClick={() => deleteCoin(item)}>
-          <TrashIcon />
-        </div>
-      </StyledTableRow>
-    </TableBody>
+    <>
+      <TableBody>
+        <StyledTableRow className={s.row}>
+          <StyledTableCell align="center">
+            <img src={item.image.small} className={s.img}></img>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography
+              align="center"
+              fontWeight={500}
+              sx={{ fontWeight: "medium" }}
+            >
+              {item.name}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography align="center" fontWeight={500}>
+              {percentageFormatter.format(item.queryQuantity)}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography align="center" fontWeight={500}>
+              {priceFormatter.format(item.queryPrice)}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography align="center" fontWeight={500}>
+              {priceFormatter.format(item.market_data.current_price.usd)}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography
+              align="center"
+              fontWeight={500}
+              className={priceChangeClass()}
+            >
+              {priceFormatter.format(coinPnL)}
+            </Typography>
+          </StyledTableCell>
+          <td className={s.trashIcon} onClick={() => deleteCoin(item)}>
+            <TrashIcon />
+          </td>
+        </StyledTableRow>
+      </TableBody>
+    </>
   );
 };
 
