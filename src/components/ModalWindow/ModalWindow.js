@@ -109,11 +109,12 @@ const ModalWindow = ({ isModal, modalClose }) => {
             sx={searchStyle}
           />
           <div className={s.list}>
-            {coinsArr.map((item) => (
+            {coinsArr.map((item, key) => (
               <SearchedItem
                 item={item}
                 openedID={openedID}
                 setOpen={handleChange}
+                key={key}
               />
             ))}
           </div>

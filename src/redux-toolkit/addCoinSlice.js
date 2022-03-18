@@ -39,7 +39,9 @@ export const addCoinsSlice = createSlice({
       const after = state.portfolioCoins.slice(idxToRemove + 1);
       const newPortfolioCoins = [...before, ...after];
 
-      state.portfolioCoins = newPortfolioCoins;
+      {
+        state.portfolioCoins = newPortfolioCoins;
+      }
     },
   },
 });

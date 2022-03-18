@@ -76,49 +76,51 @@ const PortfolioItem = ({ item }) => {
   };
 
   return (
-    <TableBody>
-      <StyledTableRow className={s.row}>
-        <StyledTableCell align="center">
-          <img src={item.image.small} className={s.img}></img>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography
-            align="center"
-            fontWeight={500}
-            sx={{ fontWeight: "medium" }}
-          >
-            {item.name}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            {percentageFormatter.format(item.queryQuantity)}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            {priceFormatter.format(item.queryPrice)}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography align="center" fontWeight={500}>
-            {priceFormatter.format(item.market_data.current_price.usd)}
-          </Typography>
-        </StyledTableCell>
-        <StyledTableCell>
-          <Typography
-            align="center"
-            fontWeight={500}
-            className={priceChangeClass()}
-          >
-            {priceFormatter.format(coinPnL)}
-          </Typography>
-        </StyledTableCell>
-        <div className={s.trashIcon} onClick={() => deleteCoin(item)}>
-          <TrashIcon />
-        </div>
-      </StyledTableRow>
-    </TableBody>
+    <>
+      <TableBody>
+        <StyledTableRow className={s.row}>
+          <StyledTableCell align="center">
+            <img src={item.image.small} className={s.img}></img>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography
+              align="center"
+              fontWeight={500}
+              sx={{ fontWeight: "medium" }}
+            >
+              {item.name}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography align="center" fontWeight={500}>
+              {percentageFormatter.format(item.queryQuantity)}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography align="center" fontWeight={500}>
+              {priceFormatter.format(item.queryPrice)}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography align="center" fontWeight={500}>
+              {priceFormatter.format(item.market_data.current_price.usd)}
+            </Typography>
+          </StyledTableCell>
+          <StyledTableCell>
+            <Typography
+              align="center"
+              fontWeight={500}
+              className={priceChangeClass()}
+            >
+              {priceFormatter.format(coinPnL)}
+            </Typography>
+          </StyledTableCell>
+          <td className={s.trashIcon} onClick={() => deleteCoin(item)}>
+            <TrashIcon />
+          </td>
+        </StyledTableRow>
+      </TableBody>
+    </>
   );
 };
 
