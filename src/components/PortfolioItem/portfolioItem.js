@@ -34,6 +34,16 @@ const PortfolioItem = ({ item }) => {
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
     },
+
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 1,
+      paddingBottom: 2,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0.5,
+      lineHeight: "1 rem",
+      paddingBottom: 1,
+    },
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({

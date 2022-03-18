@@ -29,6 +29,15 @@ const Portfolio = () => {
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
     },
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 1,
+      paddingBottom: 2,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+      lineHeight: "1 rem",
+      paddingBottom: 0,
+    },
   }));
 
   const [isModal, setModal] = useState(false);
@@ -43,8 +52,8 @@ const Portfolio = () => {
           display: "flex",
         }}
       >
-        <Balance></Balance>
-        <Button variant="contained" size="large" onClick={modalOpen}>
+        <Balance />
+        <Button variant="contained" size="medium" onClick={modalOpen}>
           Add new coin
         </Button>
         <ModalWindow isModal={isModal} modalClose={modalClose} />

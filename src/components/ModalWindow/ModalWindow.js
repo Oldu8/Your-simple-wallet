@@ -87,7 +87,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={style} className={s.modal}>
         <Typography
           id="modal-modal-title"
           variant="h6"

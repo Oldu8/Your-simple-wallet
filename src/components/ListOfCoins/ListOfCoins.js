@@ -37,17 +37,27 @@ const ListOfCoins = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,
+
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+    },
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 1,
+      paddingBottom: 2,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+      lineHeight: "1 rem",
+      paddingBottom: 0,
     },
   }));
 
   return (
     <section className={s.wrap}>
       <Typography
-        variant="h2"
+        variant="h3"
         align="center"
         color="primary.dark"
         sx={{ fontWeight: "medium" }}
@@ -84,7 +94,8 @@ const ListOfCoins = () => {
       </TableContainer>
       <Container
         sx={{
-          pt: 3,
+          p: 0,
+          pt: 2,
           pb: 2,
           display: "flex",
           justifyContent: "center",

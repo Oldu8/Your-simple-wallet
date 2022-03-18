@@ -23,9 +23,7 @@ const Balance = () => {
 
   return (
     <Container className={s.wrap}>
-      <Typography variant="h4" mt={1}>
-        Your balance:
-      </Typography>
+      <h4 className={s.balance}>Your balance:</h4>
       <Typography
         variant="span"
         sx={{ color: "rgb(61, 56, 56)" }}
