@@ -8,6 +8,11 @@ const CoinOptionBlock = (item) => {
   const [queryQuantity, setQueryQuantity] = useState("");
   const [queryPrice, setQueryPrice] = useState("");
 
+  const checkComma = (digit) => {
+    const price = digit.replace(/,/, ".");
+    setQueryPrice(price);
+  };
+
   const dispatch = useDispatch();
 
   const addCoin = ({ item }) => {
@@ -32,7 +37,7 @@ const CoinOptionBlock = (item) => {
           label="Price per coin"
           variant="standard"
           value={queryPrice}
-          onChange={(e) => setQueryPrice(e.target.value)}
+          onChange={(e) => checkComma(e.target.value)}
         ></TextField>
       </div>
       <Button
