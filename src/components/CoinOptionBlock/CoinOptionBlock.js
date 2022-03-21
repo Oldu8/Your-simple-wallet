@@ -11,6 +11,7 @@ const CoinOptionBlock = (item) => {
 
   const dispatch = useDispatch();
 
+  // comment: смысл передавать item в аргументы, если его можно получить из пропсов.
   const addCoin = ({ item }) => {
     const coinInfo = { ...item, queryPrice, queryQuantity };
     dispatch(addCoinToPortfolio(coinInfo));

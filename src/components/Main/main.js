@@ -30,6 +30,7 @@ const Main = () => {
         <Routes>
           <Route path="/" element={<ListOfCoins />}></Route>
           <Route path="/portfolio" element={<Portfolio />}></Route>
+          {/* // comment: здесь правильнее использовать компонент Redirect */}
           <Route path="*" element={<ListOfCoins />}></Route>
         </Routes>
       </Container>

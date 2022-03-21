@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Typography,
   Box,
@@ -12,6 +12,16 @@ import s from "./ModalWindow.module.scss";
 import getCoin from "../getCoin";
 import SearchedItem from "../SearchedItem/SearchedItem";
 
+function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}
+
 const ModalWindow = ({ isModal, modalClose }) => {
   const [query, setQuery] = useState("");
   const [coinsArr, setCoinsArr] = useState([]);
@@ -23,22 +33,25 @@ const ModalWindow = ({ isModal, modalClose }) => {
     });
   };
 
+  // comment:
   // Vot ety shlyapy nado prikrytit` 4to bi zaprosi yhodili celie a ne po bykve //
-  // function debounce(func, timeout = 300) {
-  //   let timer;
-  //   return (...args) => {
-  //     clearTimeout(timer);
-  //     timer = setTimeout(() => {
-  //       func.apply(this, args);
-  //     }, timeout);
-  //   };
-  // }
   // function saveInput(query) {
   //   console.log("search for coin: " + query);
   // }
   // const processChange = debounce(() => setQuery(query));
 
+  const debouncedChangeHandler = useCallback(
+    debounce(() => console.log("fetch"), 400),
+    []
+  );
+
+  const handleChangeInput = (e) => {
+    setQuery(e.target.value);
+    debouncedChangeHandler();
+  };
+
   const searchedCoin = async (query) => {
+    // comment: если запрос выдаст ошибку то ошибка пойдет наверх. Обернуть здесь в try catch
     const result = await getCoin(query);
     const res = await result.json();
 
@@ -46,6 +59,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
       if (Array.isArray(res)) {
         const first6Coins = res.splice(0, 6);
         setCoinsArr(first6Coins);
+        // comment: зачем возвращать (внизу тоже)
         return;
       } else {
         setCoinsArr([res]);
@@ -55,10 +69,11 @@ const ModalWindow = ({ isModal, modalClose }) => {
     return null;
   };
 
-  useEffect(() => {
-    searchedCoin(query);
-  }, [query]);
+  // useEffect(() => {
+  //   searchedCoin(query);
+  // }, [query]);
 
+  // comment: с таким условием модалка будет закрываться без анимации
   if (!isModal) return null;
 
   const style = {
@@ -105,7 +120,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
             label="Search"
             type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleChangeInput}
             sx={searchStyle}
           />
           <div className={s.list}>

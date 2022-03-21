@@ -6,7 +6,8 @@ export const addCoinsSlice = createSlice({
     portfolioCoins: [],
   },
   reducers: {
-    addCoinToPortfolio(state, action) {
+    // comment: надо порефаторить, сложно понять
+    addCoinToPortfolio(state, { payload }) {
       const sameCoin = state.portfolioCoins.find(
         (item) => item.id === action.payload.id
       );
@@ -16,7 +17,7 @@ export const addCoinsSlice = createSlice({
         );
         const newSameCoin = { ...sameCoin };
         newSameCoin.queryQuantity =
-          Number(action.payload.queryQuantity) + Number(sameCoin.queryQuantity);
+          Number(action.payload.queryQuantity) + +sameCoin.queryQuantity;
 
         const totalSum =
           Number(action.payload.queryQuantity) *
@@ -26,19 +27,28 @@ export const addCoinsSlice = createSlice({
         newSameCoin.queryPrice = totalSum / newSameCoin.queryQuantity;
         state.portfolioCoins = [...newPortfolioCoins, newSameCoin];
       }
+
+      // comment: зачем это нужно возвращать ?
       return {
         ...state,
         portfolioCoins: [...state.portfolioCoins, action.payload],
       };
     },
     removeCoin(state, action) {
-      const idxToRemove = state.portfolioCoins.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      const before = state.portfolioCoins.slice(0, idxToRemove);
-      const after = state.portfolioCoins.slice(idxToRemove + 1);
-      const newPortfolioCoins = [...before, ...after];
+      // comment: это можно сделать с помощью .filter
 
+      const newPortfolioCoins = state.portfolioCoins.filter(
+        (x) => x !== action.payload.id
+      );
+
+      // const idxToRemove = state.portfolioCoins.findIndex(
+      //   (item) => item.id === action.payload.id
+      // );
+      // const before = state.portfolioCoins.slice(0, idxToRemove);
+      // const after = state.portfolioCoins.slice(idxToRemove + 1);
+      // const newPortfolioCoins = [...before, ...after];
+
+      // comment: ???
       {
         state.portfolioCoins = newPortfolioCoins;
       }

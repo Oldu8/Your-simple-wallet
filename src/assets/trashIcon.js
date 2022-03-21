@@ -1,3 +1,4 @@
+// comment: почему такой подход (import as ReactComponent) ?
 import React from "react";
 
 const TrashIcon = () => {
