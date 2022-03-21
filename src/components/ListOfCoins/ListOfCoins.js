@@ -23,7 +23,9 @@ import getListOfCoins from "../getListOfCoins";
 const ListOfCoins = () => {
   const dispatch = useDispatch();
   const { coins } = useSelector((state) => state.coins);
+
   const getCoinsList = async (page) => {
+    // comment: правильнее будет логику с сетью вынести в action (createAsyncThunk)
     const result = await getListOfCoins(page);
     dispatch(getCoins(result));
   };
@@ -34,6 +36,7 @@ const ListOfCoins = () => {
     getCoinsList(page);
   }, [page]);
 
+  // comment: не оптимизировано создавать каждый раз компонент
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.dark,

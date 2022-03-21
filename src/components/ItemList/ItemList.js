@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 const ItemList = ({ item }) => {
   if (!item) return null;
 
+  // comment: эти константы (и компонент) не зависят от пропсов или стейта, и при каждом рендере будут происходить лишние вычесления этих констант. Поэтому имеет смысл вынести их за компонент (обьявить перед компонентом)
   const capFormatter = new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "USD",

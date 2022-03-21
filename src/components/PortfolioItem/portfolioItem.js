@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { removeCoin } from "../../redux-toolkit/addCoinSlice";
 
 const PortfolioItem = ({ item }) => {
+  // comment: этот priceFormatter дублируется в разных компонентах, можно вынести это в общую папку utils/
   const priceFormatter = new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "USD",

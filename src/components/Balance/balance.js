@@ -14,7 +14,9 @@ const Balance = () => {
   const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
   const [yourBalance, setBalance] = useState(0);
   useEffect(() => {
+    // comment: если болле современно то можно через метод массива .reduce
     let total = 0;
+
     portfolioCoins.forEach((item) => {
       total += item.queryQuantity * item.queryPrice;
     });
