@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./ItemList.module.scss";
+import styles from "./ItemList.module.scss";
 import { Typography, TableBody } from "@mui/material";
 import {
   priceFormatter,
@@ -14,16 +14,16 @@ const ItemList = ({ item }) => {
 
   return (
     <TableBody>
-      <StyledTableRow className={s.row}>
+      <StyledTableRow className={styles.row}>
         <StyledTableCell
           align="center"
-          className={s.rank}
+          className={styles.rank}
           sx={{ fontWeight: "medium" }}
         >
           <Typography align="center">{item.market_cap_rank}</Typography>
         </StyledTableCell>
         <StyledTableCell align="center">
-          <img src={item.image} className={s.img}></img>
+          <img src={item.image} className={styles.img}></img>
         </StyledTableCell>
         <StyledTableCell>
           <Typography

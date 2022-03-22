@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./PortfolioItem.module.scss";
+import styles from "./PortfolioItem.module.scss";
 import { Typography, TableBody } from "@mui/material";
 import { profitFunc } from "../Functions/profitFunc";
 import TrashIcon from "../../assets/TrashIcon/TrashIcon";
@@ -25,9 +25,9 @@ const PortfolioItem = ({ item }) => {
   return (
     <>
       <TableBody>
-        <StyledTableRow className={s.row}>
+        <StyledTableRow className={styles.row}>
           <StyledTableCell align="center">
-            <img src={item.image.small} className={s.img}></img>
+            <img src={item.image.small} className={styles.img}></img>
           </StyledTableCell>
           <StyledTableCell>
             <Typography
@@ -62,7 +62,7 @@ const PortfolioItem = ({ item }) => {
               {priceFormatter.format(coinPnL)}
             </Typography>
           </StyledTableCell>
-          <td className={s.trashIcon} onClick={() => deleteCoin(item)}>
+          <td className={styles.trashIcon} onClick={() => deleteCoin(item)}>
             <TrashIcon />
           </td>
         </StyledTableRow>

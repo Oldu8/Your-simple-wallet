@@ -3,17 +3,17 @@ import { Routes, Route, Link } from "react-router-dom";
 import { Container, Button } from "@mui/material";
 import Portfolio from "../Portfolio/Portfolio";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
-import s from "./Main.module.scss";
+import styles from "./Main.module.scss";
 
 const Main = () => {
   return (
-    <section className={s.wrap}>
-      <div className={s.switchBlock}>
+    <section className={styles.wrap}>
+      <div className={styles.switchBlock}>
         <Button
           variant="contained"
           size="large"
           sx={{ borderRadius: 3 }}
-          className={s.switchBtn}
+          className={styles.switchBtn}
         >
           <Link to="/"> Top 10 coins</Link>
         </Button>
@@ -21,7 +21,7 @@ const Main = () => {
           variant="contained"
           size="large"
           sx={{ borderRadius: 3 }}
-          className={s.switchBtn}
+          className={styles.switchBtn}
         >
           <Link to="/portfolio"> My portfolio</Link>
         </Button>

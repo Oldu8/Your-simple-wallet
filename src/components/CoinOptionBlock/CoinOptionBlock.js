@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "./CoinOptionBlock.module.scss";
+import styles from "./CoinOptionBlock.module.scss";
 import { Container, TextField, Button } from "@mui/material";
 import { addCoinToPortfolio } from "../../redux-toolkit/addCoinSlice";
 import { useDispatch } from "react-redux";
@@ -24,8 +24,8 @@ const CoinOptionBlock = (item) => {
   };
 
   return (
-    <Container className={s.wrap} sx={{ display: "flex" }}>
-      <div className={s.block}>
+    <Container className={styles.wrap} sx={{ display: "flex" }}>
+      <div className={styles.block}>
         <TextField
           id="standard-basic"
           label="Quantity"
@@ -34,7 +34,7 @@ const CoinOptionBlock = (item) => {
           onChange={(e) => setQueryQuantity(e.target.value)}
         ></TextField>
       </div>
-      <div className={s.block}>
+      <div className={styles.block}>
         <TextField
           id="standard-basic"
           label="Price per coin"
@@ -47,7 +47,7 @@ const CoinOptionBlock = (item) => {
         variant="outlined"
         color="success"
         size="small"
-        className={s.button}
+        className={styles.button}
         onClick={() => addCoin(item)}
         disabled={queryQuantity && queryPrice ? null : true}
       >

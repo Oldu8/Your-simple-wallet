@@ -7,37 +7,16 @@ import {
   Table,
   TableHead,
   TableRow,
-  TableCell,
-  tableCellClasses,
-  styled,
   Paper,
 } from "@mui/material";
 import Balance from "../Balance/Balance";
-import s from "./Portfolio.module.scss";
+import styles from "./Portfolio.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import PortfolioItem from "../PortfolioItem/PortfolioItem";
+import { StyledTableCell } from "../Functions/funcForMUITable";
 
 const Portfolio = () => {
   const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.primary.dark,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-    [theme.breakpoints.down("md")]: {
-      paddingTop: 1,
-      paddingBottom: 2,
-    },
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: 0,
-      lineHeight: "1 rem",
-      paddingBottom: 0,
-    },
-  }));
 
   const [isModal, setModal] = useState(false);
   const modalOpen = () => setModal(true);
@@ -46,7 +25,7 @@ const Portfolio = () => {
   return (
     <section>
       <Container
-        className={s.header}
+        className={styles.header}
         sx={{
           display: "flex",
         }}
@@ -57,7 +36,7 @@ const Portfolio = () => {
         </Button>
         <ModalWindow isModal={isModal} modalClose={modalClose} />
       </Container>
-      <section className={s.wrap}>
+      <section className={styles.wrap}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>

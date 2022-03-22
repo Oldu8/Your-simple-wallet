@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Box, Modal, Container, TextField } from "@mui/material";
-import s from "./ModalWindow.module.scss";
+import styles from "./ModalWindow.module.scss";
 import getCoin from "../Functions/getCoin";
 import SearchedItem from "../SearchedItem/SearchedItem";
 
@@ -80,7 +80,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style} className={s.modal}>
+      <Box sx={style} className={styles.modal}>
         <Typography
           id="modal-modal-title"
           variant="h6"
@@ -101,7 +101,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
             onChange={(e) => setQuery(e.target.value)}
             sx={searchStyle}
           />
-          <div className={s.list}>
+          <div className={styles.list}>
             {coinsArr.map((item, key) => (
               <SearchedItem
                 item={item}

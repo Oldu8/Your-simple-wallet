@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useSelector, useDispatch } from "react-redux";
 import { getCoins } from "../../redux-toolkit/getTopCoinsSlice";
-import s from "./ListOfCoins.module.scss";
+import styles from "./ListOfCoins.module.scss";
 import {
   Typography,
-  styled,
   Table,
-  TableCell,
-  tableCellClasses,
   TableContainer,
   TableHead,
   TableRow,
@@ -19,6 +16,7 @@ import {
 } from "@mui/material";
 
 import getListOfCoins from "../Functions/getListOfCoins";
+import { StyledTableCell } from "../Functions/funcForMUITable";
 
 const ListOfCoins = () => {
   const dispatch = useDispatch();
@@ -34,28 +32,8 @@ const ListOfCoins = () => {
     getCoinsList(page);
   }, [page]);
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.primary.dark,
-
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-    [theme.breakpoints.down("md")]: {
-      paddingTop: 1,
-      paddingBottom: 2,
-    },
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: 0,
-      lineHeight: "1 rem",
-      paddingBottom: 0,
-    },
-  }));
-
   return (
-    <section className={s.wrap}>
+    <section className={styles.wrap}>
       <Typography
         variant="h3"
         align="center"
