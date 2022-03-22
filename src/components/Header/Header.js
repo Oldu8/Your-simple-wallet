@@ -9,7 +9,7 @@ import {
   makeStyles,
 } from "@mui/material";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import s from "./header.module.scss";
+import s from "./Header.module.scss";
 
 const Header = () => {
   const [isMobile, setMobile] = useState(false);

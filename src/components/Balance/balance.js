@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import s from "./balance.module.scss";
+import s from "./Balance.module.scss";
 import { Container, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 

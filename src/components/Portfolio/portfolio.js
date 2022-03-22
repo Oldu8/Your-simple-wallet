@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
 import {
   Container,
   Button,
@@ -13,10 +12,10 @@ import {
   styled,
   Paper,
 } from "@mui/material";
-import Balance from "../Balance/balance";
-import s from "./portfolio.module.scss";
+import Balance from "../Balance/Balance";
+import s from "./Portfolio.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import PortfolioItem from "../PortfolioItem/portfolioItem";
+import PortfolioItem from "../PortfolioItem/PortfolioItem";
 
 const Portfolio = () => {
   const { portfolioCoins } = useSelector((state) => state.portfolioCoins);

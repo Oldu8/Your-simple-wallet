@@ -1,73 +1,20 @@
 import React from "react";
-import s from "./portfolioItem.module.scss";
-import {
-  Typography,
-  styled,
-  TableBody,
-  TableCell,
-  tableCellClasses,
-  TableRow,
-} from "@mui/material";
-import { profitFunc } from "./profitFunc";
-import TrashIcon from "../../assets/trashIcon";
+import s from "./PortfolioItem.module.scss";
+import { Typography, TableBody } from "@mui/material";
+import { profitFunc } from "../Functions/profitFunc";
+import TrashIcon from "../../assets/TrashIcon/TrashIcon";
 import { useDispatch } from "react-redux";
 import { removeCoin } from "../../redux-toolkit/addCoinSlice";
+import { priceFormatter, percentageFormatter } from "../Functions/formatters";
+import { StyledTableCell, StyledTableRow } from "../Functions/funcForMUITable";
+import { priceChangeClass } from "../Functions/priceChangeClass";
 
 const PortfolioItem = ({ item }) => {
-  const priceFormatter = new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-
-  const percentageFormatter = new Intl.NumberFormat("de-DE", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.primary.dark,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-
-    [theme.breakpoints.down("md")]: {
-      paddingTop: 1,
-      paddingBottom: 2,
-    },
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: 0.5,
-      lineHeight: "1 rem",
-      paddingBottom: 1,
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
-
   const coinPnL = profitFunc(
     item.queryPrice,
     item.queryQuantity,
     item.market_data.current_price.usd
   );
-
-  const priceChangeClass = () => {
-    if (coinPnL > 0) {
-      return s.percentagePlus;
-    } else {
-      return s.percentageMinus;
-    }
-  };
 
   const dispatch = useDispatch();
 
@@ -110,7 +57,7 @@ const PortfolioItem = ({ item }) => {
             <Typography
               align="center"
               fontWeight={500}
-              className={priceChangeClass()}
+              className={priceChangeClass(coinPnL)}
             >
               {priceFormatter.format(coinPnL)}
             </Typography>

@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  Box,
-  Button,
-  Modal,
-  Container,
-  TextField,
-  Link,
-} from "@mui/material";
+import { Typography, Box, Modal, Container, TextField } from "@mui/material";
 import s from "./ModalWindow.module.scss";
-import getCoin from "../getCoin";
+import getCoin from "../Functions/getCoin";
 import SearchedItem from "../SearchedItem/SearchedItem";
 
 const ModalWindow = ({ isModal, modalClose }) => {
@@ -24,19 +16,21 @@ const ModalWindow = ({ isModal, modalClose }) => {
   };
 
   // Vot ety shlyapy nado prikrytit` 4to bi zaprosi yhodili celie a ne po bykve //
-  // function debounce(func, timeout = 300) {
-  //   let timer;
-  //   return (...args) => {
-  //     clearTimeout(timer);
-  //     timer = setTimeout(() => {
-  //       func.apply(this, args);
-  //     }, timeout);
-  //   };
-  // }
-  // function saveInput(query) {
-  //   console.log("search for coin: " + query);
-  // }
-  // const processChange = debounce(() => setQuery(query));
+  function debounce(func, timeout = 1000) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+  function saveInput(query) {
+    console.log("search for coin: " + query);
+    searchedCoin(query);
+  }
+
+  const processChange = debounce(() => saveInput(query));
 
   const searchedCoin = async (query) => {
     const result = await getCoin(query);
@@ -56,10 +50,8 @@ const ModalWindow = ({ isModal, modalClose }) => {
   };
 
   useEffect(() => {
-    searchedCoin(query);
+    processChange(query);
   }, [query]);
-
-  if (!isModal) return null;
 
   const style = {
     position: "absolute",
@@ -79,6 +71,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
     mb: 3,
     height: 50,
   };
+  if (!isModal) return null;
 
   return (
     <Modal

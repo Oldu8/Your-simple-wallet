@@ -18,7 +18,7 @@ import {
   Pagination,
 } from "@mui/material";
 
-import getListOfCoins from "../getListOfCoins";
+import getListOfCoins from "../Functions/getListOfCoins";
 
 const ListOfCoins = () => {
   const dispatch = useDispatch();
