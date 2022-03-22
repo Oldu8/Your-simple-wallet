@@ -17,3 +17,8 @@ export const capFormatter = new Intl.NumberFormat("de-DE", {
   minimumFractionDigits: 0,
   maximumFractionDigits: 0,
 });
+
+export const quantityFormatter = new Intl.NumberFormat("de-DE", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});

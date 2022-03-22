@@ -7,12 +7,14 @@ import { priceFormatter } from "../Functions/formatters";
 const Balance = () => {
   const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
   const [yourBalance, setBalance] = useState(0);
+
   useEffect(() => {
-    let total = 0;
-    portfolioCoins.forEach((item) => {
-      total += item.queryQuantity * item.queryPrice;
-    });
-    setBalance(total);
+    const res = portfolioCoins.reduce(function (sum, current) {
+      let multi = +current.queryQuantity * +current.queryPrice;
+      return sum + multi;
+    }, 0);
+
+    setBalance(res);
   }, [portfolioCoins]);
 
   return (

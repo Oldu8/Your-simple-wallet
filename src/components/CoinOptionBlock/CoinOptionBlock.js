@@ -16,8 +16,8 @@ const CoinOptionBlock = (item) => {
     setQueryPrice(price);
   };
 
-  const addCoin = ({ item }) => {
-    const coinInfo = { ...item, queryPrice, queryQuantity };
+  const addCoin = () => {
+    const coinInfo = { ...item.item, queryPrice, queryQuantity };
     dispatch(addCoinToPortfolio(coinInfo));
     setQueryPrice(inititalState);
     setQueryQuantity(inititalState);
@@ -48,7 +48,7 @@ const CoinOptionBlock = (item) => {
         color="success"
         size="small"
         className={styles.button}
-        onClick={() => addCoin(item)}
+        onClick={() => addCoin()}
         disabled={queryQuantity && queryPrice ? null : true}
       >
         Add

@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./PortfolioItem.module.scss";
 import { Typography, TableBody } from "@mui/material";
 import { profitFunc } from "../Functions/profitFunc";
-import TrashIcon from "../../assets/TrashIcon/TrashIcon";
+import { ReactComponent as TrashIcon } from "../../assets/TrashIcon/TrashIcon.svg";
 import { useDispatch } from "react-redux";
 import { removeCoin } from "../../redux-toolkit/addCoinSlice";
-import { priceFormatter, percentageFormatter } from "../Functions/formatters";
+import { priceFormatter, quantityFormatter } from "../Functions/formatters";
 import { StyledTableCell, StyledTableRow } from "../Functions/funcForMUITable";
 import { priceChangeClass } from "../Functions/priceChangeClass";
 
@@ -40,7 +40,7 @@ const PortfolioItem = ({ item }) => {
           </StyledTableCell>
           <StyledTableCell>
             <Typography align="center" fontWeight={500}>
-              {percentageFormatter.format(item.queryQuantity)}
+              {quantityFormatter.format(item.queryQuantity)}
             </Typography>
           </StyledTableCell>
           <StyledTableCell>

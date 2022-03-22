@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import styles from "./Header.module.scss";
 
 const Header = () => {
-  const [isMobile, setMobile] = useState(false);
   const screenWidth = useMediaQuery({ query: "(max-width: 754px)" });
-  useEffect(() => {
-    setMobile(screenWidth);
-  }, [screenWidth]);
-  if (isMobile) {
+  if (screenWidth) {
     return null;
   }
   return (
