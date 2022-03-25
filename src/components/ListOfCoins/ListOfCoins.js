@@ -21,9 +21,14 @@ import { StyledTableCell } from "../Functions/funcForMUITable";
 const ListOfCoins = () => {
   const dispatch = useDispatch();
   const { coins } = useSelector((state) => state.coins);
+
   const getCoinsList = async (page) => {
-    const result = await getListOfCoins(page);
-    dispatch(getCoins(result));
+    try {
+      const result = await getListOfCoins(page);
+      dispatch(getCoins(result)); /// vunesti v action
+    } catch {
+      console.log("fetch error");
+    }
   };
 
   const [page, setPage] = useState(1);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Redirect } from "react-router-dom";
 import { Container, Button } from "@mui/material";
 import Portfolio from "../Portfolio/Portfolio";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
