@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@mui/material";
-import s from "./SearchedItem.module.scss";
+import styles from "./SearchedItem.module.scss";
 import CoinOptionBlock from "../CoinOptionBlock/CoinOptionBlock";
 
 const SearchedItem = ({ item, openedID, setOpen }) => {
@@ -12,10 +12,10 @@ const SearchedItem = ({ item, openedID, setOpen }) => {
   if (!item) return null;
   return (
     <section>
-      <div className={s.item} key={item.id}>
-        <div className={s.nameBox}>
-          <img src={item.image.small} className={s.img} alt={item.id} />
-          <p className={s.coinName}>{item.id}</p>
+      <div className={styles.item} key={item.id}>
+        <div className={styles.nameBox}>
+          <img src={item.image.small} className={styles.img} alt={item.id} />
+          <p className={styles.coinName}>{item.id}</p>
         </div>
         <Button
           variant="contained"

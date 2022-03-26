@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  Box,
-  Button,
-  Modal,
-  Container,
-  TextField,
-  Link,
-} from "@mui/material";
-import s from "./ModalWindow.module.scss";
-import getCoin from "../getCoin";
+import React, { useEffect, useState, useCallback } from "react";
+import { Typography, Box, Modal, Container, TextField } from "@mui/material";
+import styles from "./ModalWindow.module.scss";
+import getCoin from "../Functions/getCoin";
 import SearchedItem from "../SearchedItem/SearchedItem";
+
+function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}
 
 const ModalWindow = ({ isModal, modalClose }) => {
   const [query, setQuery] = useState("");
@@ -22,44 +24,38 @@ const ModalWindow = ({ isModal, modalClose }) => {
       return prevId === id ? null : id;
     });
   };
-
-  // Vot ety shlyapy nado prikrytit` 4to bi zaprosi yhodili celie a ne po bykve //
-  // function debounce(func, timeout = 300) {
-  //   let timer;
-  //   return (...args) => {
-  //     clearTimeout(timer);
-  //     timer = setTimeout(() => {
-  //       func.apply(this, args);
-  //     }, timeout);
-  //   };
-  // }
-  // function saveInput(query) {
-  //   console.log("search for coin: " + query);
-  // }
-  // const processChange = debounce(() => setQuery(query));
-
-  const searchedCoin = async (query) => {
-    const result = await getCoin(query);
-    const res = await result.json();
-
-    if (result.ok && result.status === 200) {
-      if (Array.isArray(res)) {
-        const first6Coins = res.splice(0, 6);
-        setCoinsArr(first6Coins);
-        return;
-      } else {
-        setCoinsArr([res]);
-        return;
+  const searchedCoin = async (e) => {
+    try {
+      const result = await getCoin(e);
+      const res = await result.json();
+      if (result.ok && result.status === 200) {
+        if (Array.isArray(res)) {
+          const first6Coins = res.splice(0, 6);
+          setCoinsArr(first6Coins);
+          return;
+        } else {
+          setCoinsArr([res]);
+          return;
+        }
       }
+    } catch {
+      console.log("error");
     }
-    return null;
+  };
+
+  const debouncedChangeHandler = useCallback(
+    debounce((e) => searchedCoin(e), 600),
+    []
+  );
+
+  const handleChangeInput = (e) => {
+    setQuery(e.target.value);
+    debouncedChangeHandler(e.target.value);
   };
 
   useEffect(() => {
     searchedCoin(query);
-  }, [query]);
-
-  if (!isModal) return null;
+  }, []);
 
   const style = {
     position: "absolute",
@@ -79,6 +75,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
     mb: 3,
     height: 50,
   };
+  if (!isModal) return null;
 
   return (
     <Modal
@@ -87,7 +84,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style} className={s.modal}>
+      <Box sx={style} className={styles.modal}>
         <Typography
           id="modal-modal-title"
           variant="h6"
@@ -105,10 +102,10 @@ const ModalWindow = ({ isModal, modalClose }) => {
             label="Search"
             type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleChangeInput}
             sx={searchStyle}
           />
-          <div className={s.list}>
+          <div className={styles.list}>
             {coinsArr.map((item, key) => (
               <SearchedItem
                 item={item}

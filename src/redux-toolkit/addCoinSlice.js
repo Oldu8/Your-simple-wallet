@@ -11,37 +11,27 @@ export const addCoinsSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (sameCoin) {
+        const { id, queryPrice, queryQuantity } = action.payload;
         const newPortfolioCoins = state.portfolioCoins.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item.id !== id
         );
         const newSameCoin = { ...sameCoin };
-        newSameCoin.queryQuantity =
-          Number(action.payload.queryQuantity) + Number(sameCoin.queryQuantity);
-
+        newSameCoin.queryQuantity = +queryQuantity + +sameCoin.queryQuantity;
         const totalSum =
-          Number(action.payload.queryQuantity) *
-            Number(action.payload.queryPrice) +
-          Number(sameCoin.queryQuantity) * Number(sameCoin.queryPrice);
+          +queryQuantity * +queryPrice +
+          +sameCoin.queryQuantity * +sameCoin.queryPrice;
 
         newSameCoin.queryPrice = totalSum / newSameCoin.queryQuantity;
         state.portfolioCoins = [...newPortfolioCoins, newSameCoin];
+      } else {
+        state.portfolioCoins = [...state.portfolioCoins, action.payload];
       }
-      return {
-        ...state,
-        portfolioCoins: [...state.portfolioCoins, action.payload],
-      };
     },
     removeCoin(state, action) {
-      const idxToRemove = state.portfolioCoins.findIndex(
-        (item) => item.id === action.payload.id
+      const newPortfolioCoins = state.portfolioCoins.filter(
+        (x) => x.id !== action.payload.id
       );
-      const before = state.portfolioCoins.slice(0, idxToRemove);
-      const after = state.portfolioCoins.slice(idxToRemove + 1);
-      const newPortfolioCoins = [...before, ...after];
-
-      {
-        state.portfolioCoins = newPortfolioCoins;
-      }
+      state.portfolioCoins = newPortfolioCoins;
     },
   },
 });
