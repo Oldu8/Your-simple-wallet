@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useSelector, useDispatch } from "react-redux";
-import { getCoins } from "../../redux-toolkit/getTopCoinsSlice";
+import { fetchTopCoins } from "../../redux-toolkit/getTopCoinsSliceFetch";
 import styles from "./ListOfCoins.module.scss";
 import {
   Typography,
@@ -15,26 +15,15 @@ import {
   Pagination,
 } from "@mui/material";
 
-import getListOfCoins from "../Functions/getListOfCoins";
 import { StyledTableCell } from "../Functions/funcForMUITable";
 
 const ListOfCoins = () => {
   const dispatch = useDispatch();
   const { coins } = useSelector((state) => state.coins);
-
-  const getCoinsList = async (page) => {
-    try {
-      const result = await getListOfCoins(page);
-      dispatch(getCoins(result)); /// vunesti v action
-    } catch {
-      console.log("fetch error");
-    }
-  };
-
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getCoinsList(page);
+    dispatch(fetchTopCoins(page));
   }, [page]);
 
   return (

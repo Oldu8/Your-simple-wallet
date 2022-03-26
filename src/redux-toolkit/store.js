@@ -3,7 +3,7 @@ import {
   combineReducers,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import getCoinsReducer from "./getTopCoinsSlice";
+import getCoinsReducer from "./getTopCoinsSliceFetch";
 import addCoinReducer from "./addCoinSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
