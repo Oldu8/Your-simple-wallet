@@ -9,11 +9,6 @@ const CoinOptionBlock = (item) => {
   const [queryQuantity, setQueryQuantity] = useState(inititalState);
   const [queryPrice, setQueryPrice] = useState(inititalState);
 
-  const checkComma = (digit) => {
-    const price = digit.replace(/,/, ".");
-    setQueryPrice(price);
-  };
-
   const dispatch = useDispatch();
 
   const checkComma = (digit) => {
