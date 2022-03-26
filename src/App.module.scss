@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/roboto-v27-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.App {
+  background: radial-gradient(at bottom, #a9bdd4, #073146);
+  min-height: 100vh;
+  height: 100%;
+  @media screen and (max-width: 1024px) {
+  }
+}

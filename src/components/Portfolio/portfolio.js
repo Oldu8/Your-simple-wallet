@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   Container,
   Button,
@@ -6,29 +7,16 @@ import {
   Table,
   TableHead,
   TableRow,
-  TableCell,
-  tableCellClasses,
-  styled,
   Paper,
 } from "@mui/material";
-import Balance from "../Balance/balance";
-import s from "./portfolio.module.scss";
+import Balance from "../Balance/Balance";
+import styles from "./Portfolio.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { useSelector } from "react-redux";
-import PortfolioItem from "../PortfolioItem/portfolioItem";
-import { getPortfolioCoins } from "./selectors";
+import PortfolioItem from "../PortfolioItem/PortfolioItem";
+import { StyledTableCell } from "../Functions/funcForMUITable";
 
 const Portfolio = () => {
-  const portfolioArr = useSelector(getPortfolioCoins);
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.primary.dark,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+  const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
 
   const [isModal, setModal] = useState(false);
   const modalOpen = () => setModal(true);
@@ -37,18 +25,18 @@ const Portfolio = () => {
   return (
     <section>
       <Container
-        className={s.header}
+        className={styles.header}
         sx={{
           display: "flex",
         }}
       >
-        <Balance></Balance>
-        <Button variant="contained" size="large" onClick={modalOpen}>
+        <Balance />
+        <Button variant="contained" size="medium" onClick={modalOpen}>
           Add new coin
         </Button>
         <ModalWindow isModal={isModal} modalClose={modalClose} />
       </Container>
-      <section className={s.wrap}>
+      <section className={styles.wrap}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -73,8 +61,8 @@ const Portfolio = () => {
                 </StyledTableCell>
               </TableRow>
             </TableHead>
-            {portfolioArr
-              ? portfolioArr.map((item, index) => (
+            {portfolioCoins
+              ? portfolioCoins.map((item, index) => (
                   <PortfolioItem item={item} key={index} />
                 ))
               : null}

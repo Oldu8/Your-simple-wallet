@@ -1,12 +1,20 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import s from "./header.module.scss";
+import styles from "./Header.module.scss";
 
 const Header = () => {
+  const screenWidth = useMediaQuery({ query: "(max-width: 754px)" });
+  if (screenWidth) {
+    return null;
+  }
   return (
-    <AppBar position="static">
-      <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+    <AppBar position="static" className={styles.header}>
+      <Toolbar
+        sx={{ display: "flex", justifyContent: "center" }}
+        className={styles.toolbar}
+      >
         <Typography variant="h4" align="center">
           Welcome to your friendly crypto wallet
         </Typography>
