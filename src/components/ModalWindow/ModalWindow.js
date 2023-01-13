@@ -43,6 +43,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedChangeHandler = useCallback(
     debounce((e) => searchedCoin(e), 600),
     []
@@ -55,6 +56,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
 
   useEffect(() => {
     searchedCoin(query);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const style = {

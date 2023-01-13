@@ -23,7 +23,7 @@ const ItemList = ({ item }) => {
           <Typography align="center">{item.market_cap_rank}</Typography>
         </StyledTableCell>
         <StyledTableCell align="center">
-          <img src={item.image} className={styles.img}></img>
+          <img src={item.image} className={styles.img} alt='currency icon'></img>
         </StyledTableCell>
         <StyledTableCell>
           <Typography

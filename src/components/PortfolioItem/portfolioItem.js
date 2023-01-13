@@ -27,7 +27,7 @@ const PortfolioItem = ({ item }) => {
       <TableBody>
         <StyledTableRow className={styles.row}>
           <StyledTableCell align="center">
-            <img src={item.image.small} className={styles.img}></img>
+            <img src={item.image.small} alt='currency icon small' className={styles.img}></img>
           </StyledTableCell>
           <StyledTableCell>
             <Typography
