@@ -34,7 +34,7 @@ const Portfolio = () => {
         <Button variant="contained" size="medium" onClick={modalOpen}>
           Add new coin
         </Button>
-        <ModalWindow isModal={isModal} modalClose={modalClose} />
+        {isModal && <ModalWindow isModal={isModal} modalClose={modalClose} />}
       </Container>
       <section className={styles.wrap}>
         <TableContainer component={Paper}>
@@ -63,8 +63,8 @@ const Portfolio = () => {
             </TableHead>
             {portfolioCoins
               ? portfolioCoins.map((item, index) => (
-                  <PortfolioItem item={item} key={index} />
-                ))
+                <PortfolioItem item={item} key={index} />
+              ))
               : null}
           </Table>
         </TableContainer>

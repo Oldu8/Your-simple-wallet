@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Typography, Box, Modal, Container, TextField } from "@mui/material";
 import styles from "./ModalWindow.module.scss";
-import getCoin from "../Functions/getCoin";
+import { getCoin } from "../Functions/getCoin";
 import SearchedItem from "../SearchedItem/SearchedItem";
 
 function debounce(func, timeout = 300) {
@@ -27,17 +27,15 @@ const ModalWindow = ({ isModal, modalClose }) => {
   const searchedCoin = async (e) => {
     try {
       const result = await getCoin(e);
-      const res = await result.json();
-      if (result.ok && result.status === 200) {
-        if (Array.isArray(res)) {
-          const first6Coins = res.splice(0, 6);
-          setCoinsArr(first6Coins);
-          return;
-        } else {
-          setCoinsArr([res]);
-          return;
-        }
+      if (Array.isArray(result)) {
+        const first6Coins = result.splice(0, 6);
+        setCoinsArr(first6Coins);
+        return;
+      } else {
+        setCoinsArr([result]);
+        return;
       }
+
     } catch {
       console.log("error");
     }

@@ -40,17 +40,17 @@ const PortfolioItem = ({ item }) => {
           </StyledTableCell>
           <StyledTableCell>
             <Typography align="center" fontWeight={500}>
-              {quantityFormatter.format(item.queryQuantity)}
+              {quantityFormatter(+item.queryQuantity)}
             </Typography>
           </StyledTableCell>
           <StyledTableCell>
             <Typography align="center" fontWeight={500}>
-              {priceFormatter.format(item.queryPrice)}
+              {priceFormatter(+item.queryPrice)}
             </Typography>
           </StyledTableCell>
           <StyledTableCell>
             <Typography align="center" fontWeight={500}>
-              {priceFormatter.format(item.market_data.current_price.usd)}
+              {priceFormatter(+item.market_data.current_price.usd)}
             </Typography>
           </StyledTableCell>
           <StyledTableCell>
@@ -59,7 +59,7 @@ const PortfolioItem = ({ item }) => {
               fontWeight={500}
               className={priceChangeClass(coinPnL)}
             >
-              {priceFormatter.format(coinPnL)}
+              {priceFormatter(+coinPnL)}
             </Typography>
           </StyledTableCell>
           <td className={styles.trashIcon} onClick={() => deleteCoin(item)}>

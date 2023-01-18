@@ -25,7 +25,7 @@ const Balance = () => {
         sx={{ color: "rgb(61, 56, 56)" }}
         className={styles.balance}
       >
-        {priceFormatter.format(yourBalance)}
+        {priceFormatter(+yourBalance)}
       </Typography>
     </Container>
   );

@@ -8,13 +8,10 @@ export const getCoin: RequestType<string, ICoin[]> = async (id) => {
   return responseBody;
 };
 
-// const api = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=`;
+const api = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=`;
 
-// export const fetchTopCoins = createAsyncThunk(
-//   "DOWNLOAD_COINS",
-//   async (page) => {
-//     let response = await fetch(`${api} + ${page}`);
-//     const data = await response.json();
-//     return data;
-//   }
-// );
+export const getTopCoins: RequestType<string, ICoin[]> = async (page) => {
+  let response = await fetch(`${api} + ${page}`);
+  const data = await response.json();
+  return data;
+};

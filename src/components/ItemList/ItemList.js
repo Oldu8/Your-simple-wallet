@@ -36,7 +36,7 @@ const ItemList = ({ item }) => {
         </StyledTableCell>
         <StyledTableCell>
           <Typography align="center" fontWeight={500}>
-            {priceFormatter.format(item.current_price)}
+            {priceFormatter(+item.current_price)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
@@ -45,12 +45,12 @@ const ItemList = ({ item }) => {
             fontWeight={500}
             className={priceChangeClass(item.price_change_percentage_24h)}
           >
-            {percentageFormatter.format(item.price_change_percentage_24h / 100)}
+            {percentageFormatter(item.price_change_percentage_24h / 100)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
           <Typography align="center" fontWeight={500}>
-            {capFormatter.format(item.market_cap)}
+            {capFormatter(+item.market_cap)}
           </Typography>
         </StyledTableCell>
       </StyledTableRow>
