@@ -10,6 +10,26 @@ export interface ICoin {
   price_change_percentage_24h: number;
   market_cap: number;
 }
+export interface ICoinPortfolio {
+  id: string;
+  symbol: string;
+  name: string;
+  image: {
+    small: string;
+    large: string;
+    thumb: string;
+  };
+  market_data: {
+    current_price: {
+      usd: number;
+    };
+  };
+  queryPrice: number;
+  queryQuantity: number;
+  market_cap_rank: number;
+  price_change_percentage_24h: number;
+  market_cap: number;
+}
 
 export interface IMarketData {}
 
@@ -18,6 +38,6 @@ export interface IState {
     coins: ICoin[];
   };
   portfolioCoins: {
-    portfolioCoins: ICoin[];
+    portfolioCoins: ICoinPortfolio[];
   };
 }

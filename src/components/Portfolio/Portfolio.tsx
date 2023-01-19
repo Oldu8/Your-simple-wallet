@@ -10,14 +10,18 @@ import {
   Paper,
 } from "@mui/material";
 import Balance from "../Balance/Balance";
-import styles from "./Portfolio.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import PortfolioItem from "../PortfolioItem/PortfolioItem";
 import { StyledTableCell } from "../Functions/funcForMUITable";
+// @ts-ignore
+import styles from "./Portfolio.module.scss";
+import { IState } from "../../interface/entities";
+import { cellNamesForPortfolio } from "../../assets/arraysForTable";
 
 const Portfolio = () => {
-  const { portfolioCoins } = useSelector((state) => state.portfolioCoins);
-
+  const portfolioCoins = useSelector(
+    (state: IState) => state.portfolioCoins.portfolioCoins
+  );
   const [isModal, setModal] = useState(false);
   const modalOpen = () => setModal(true);
   const modalClose = () => setModal(false);
@@ -41,30 +45,15 @@ const Portfolio = () => {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="center" fontWeight={500}>
-                  Icon
-                </StyledTableCell>
-                <StyledTableCell align="center" fontWeight={500}>
-                  Name
-                </StyledTableCell>
-                <StyledTableCell align="center" fontWeight={500}>
-                  Holdings
-                </StyledTableCell>
-                <StyledTableCell align="center" fontWeight={500}>
-                  Buy price
-                </StyledTableCell>
-                <StyledTableCell align="center" fontWeight={500}>
-                  Current Price
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  Profit and Loss
-                </StyledTableCell>
+                {cellNamesForPortfolio.map((i) => (
+                  <StyledTableCell key={i}>{i}</StyledTableCell>
+                ))}
               </TableRow>
             </TableHead>
             {portfolioCoins
               ? portfolioCoins.map((item, index) => (
-                <PortfolioItem item={item} key={index} />
-              ))
+                  <PortfolioItem item={item} key={index} />
+                ))
               : null}
           </Table>
         </TableContainer>

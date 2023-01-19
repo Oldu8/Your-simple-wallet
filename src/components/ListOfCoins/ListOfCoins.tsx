@@ -19,6 +19,7 @@ import { StyledTableCell } from "../Functions/funcForMUITable";
 import styles from "./ListOfCoins.module.scss";
 import { IState } from "../../interface/entities";
 import { paginationStyle } from "../Functions/stylesForMUI";
+import { cellNamesForTop } from "../../assets/arraysForTable";
 
 const ListOfCoins = () => {
   const dispatch = useDispatch();
@@ -30,15 +31,6 @@ const ListOfCoins = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  const cellNamesArr = [
-    "Rank",
-    "Icon",
-    "Name",
-    "Price",
-    "Price change %",
-    "Market Cap",
-  ];
-
   return (
     <section className={styles.wrap}>
       <Typography
@@ -49,12 +41,11 @@ const ListOfCoins = () => {
       >
         List of coins:
       </Typography>
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              {cellNamesArr.map((i) => (
+              {cellNamesForTop.map((i) => (
                 <StyledTableCell key={i}>{i}</StyledTableCell>
               ))}
             </TableRow>

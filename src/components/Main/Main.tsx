@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { Container, Button } from "@mui/material";
 import Portfolio from "../Portfolio/Portfolio";
 import ListOfCoins from "../ListOfCoins/ListOfCoins";
+// @ts-ignore
 import styles from "./Main.module.scss";
 
 const Main = () => {
