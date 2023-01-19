@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./ItemList.module.scss";
 import { Typography, TableBody } from "@mui/material";
 import {
   priceFormatter,
@@ -8,10 +7,12 @@ import {
 } from "../Functions/formatters";
 import { StyledTableCell, StyledTableRow } from "../Functions/funcForMUITable";
 import { priceChangeClass } from "../Functions/priceChangeClass";
+// @ts-ignore
+import styles from "./ItemList.module.scss";
+import { ItemListFunc } from "../../types/types";
 
-const ItemList = ({ item }) => {
+const ItemList: ItemListFunc = ({ item }) => {
   if (!item) return null;
-
   return (
     <TableBody>
       <StyledTableRow className={styles.row}>
@@ -23,7 +24,11 @@ const ItemList = ({ item }) => {
           <Typography align="center">{item.market_cap_rank}</Typography>
         </StyledTableCell>
         <StyledTableCell align="center">
-          <img src={item.image} className={styles.img} alt='currency icon'></img>
+          <img
+            src={item.image}
+            className={styles.img}
+            alt="currency icon"
+          ></img>
         </StyledTableCell>
         <StyledTableCell>
           <Typography

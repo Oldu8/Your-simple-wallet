@@ -5,6 +5,7 @@ import { priceFormatter } from "../Functions/formatters";
 import { IState } from "../../interface/entities";
 // @ts-ignore
 import styles from "./Balance.module.scss";
+import { balanceStyle } from "../Functions/stylesForMUI";
 
 const Balance = () => {
   const portfolioCoins = useSelector(
@@ -25,15 +26,7 @@ const Balance = () => {
   return (
     <Container className={styles.wrap}>
       <h4 className={styles.balance}>Your balance:</h4>
-      <Typography
-        variant="body2"
-        sx={{
-          color: "rgb(61, 56, 56)",
-          fontWeight: "bold",
-          fontSize: "2.5rem",
-        }}
-        className={styles.balance}
-      >
+      <Typography variant="body2" sx={balanceStyle} className={styles.balance}>
         {priceFormatter(+yourBalance)}
       </Typography>
     </Container>

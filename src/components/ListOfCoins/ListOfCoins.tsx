@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTopCoins } from "../../redux-toolkit/getTopCoinsSliceFetch";
-import styles from "./ListOfCoins.module.scss";
 import {
   Typography,
   Table,
@@ -16,16 +15,29 @@ import {
 } from "@mui/material";
 
 import { StyledTableCell } from "../Functions/funcForMUITable";
+// @ts-ignore
+import styles from "./ListOfCoins.module.scss";
+import { IState } from "../../interface/entities";
+import { paginationStyle } from "../Functions/stylesForMUI";
 
 const ListOfCoins = () => {
   const dispatch = useDispatch();
-  const { coins } = useSelector((state) => state.coins);
-  const [page, setPage] = useState(1);
+  const coins = useSelector((state: IState) => state.coins.coins);
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(fetchTopCoins(page));
+    dispatch(fetchTopCoins(page.toString()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  const cellNamesArr = [
+    "Rank",
+    "Icon",
+    "Name",
+    "Price",
+    "Price change %",
+    "Market Cap",
+  ];
 
   return (
     <section className={styles.wrap}>
@@ -42,22 +54,9 @@ const ListOfCoins = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="center" fontWeight={500}>
-                Rank
-              </StyledTableCell>
-              <StyledTableCell align="center" fontWeight={500}>
-                Icon
-              </StyledTableCell>
-              <StyledTableCell align="center" fontWeight={500}>
-                Name
-              </StyledTableCell>
-              <StyledTableCell align="center" fontWeight={500}>
-                Price
-              </StyledTableCell>
-              <StyledTableCell align="center" fontWeight={500}>
-                Price change percentage
-              </StyledTableCell>
-              <StyledTableCell align="center">Market Cap</StyledTableCell>
+              {cellNamesArr.map((i) => (
+                <StyledTableCell key={i}>{i}</StyledTableCell>
+              ))}
             </TableRow>
           </TableHead>
           {coins.map((coin) => (
@@ -65,15 +64,7 @@ const ListOfCoins = () => {
           ))}
         </Table>
       </TableContainer>
-      <Container
-        sx={{
-          p: 0,
-          pt: 2,
-          pb: 2,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <Container sx={paginationStyle}>
         <Stack spacing={3}>
           <Pagination
             count={10}
