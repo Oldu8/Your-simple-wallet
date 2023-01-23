@@ -2,7 +2,6 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-// @ts-ignore
 import styles from "./Header.module.scss";
 
 const Header = () => {

@@ -3,51 +3,60 @@ import { Typography, Box, Modal, Container, TextField } from "@mui/material";
 import styles from "./ModalWindow.module.scss";
 import { getCoin } from "../Functions/getCoin";
 import SearchedItem from "../SearchedItem/SearchedItem";
+import { modalStyle, searchStyle } from "../Functions/stylesForMUI";
+import {
+  ChangeHandler,
+  DebouncedChangeHandler,
+  ModalWindowFunc,
+} from "../../types/types";
+import { ICoin } from "../../interface/entities";
 
-function debounce(func, timeout = 300) {
-  let timer;
-  return (...args) => {
+type debounceCallBack = (arg: string) => void;
+
+const debounce = (func: debounceCallBack, timeout = 300) => {
+  let timer: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<debounceCallBack>) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       func.apply(this, args);
     }, timeout);
   };
-}
+};
 
-const ModalWindow = ({ isModal, modalClose }) => {
-  const [query, setQuery] = useState("");
-  const [coinsArr, setCoinsArr] = useState([]);
-  const [openedID, setOpenedId] = useState(null);
+const ModalWindow: ModalWindowFunc = ({ isModal, modalClose }) => {
+  const [query, setQuery] = useState<string>("");
+  const [coinsArr, setCoinsArr] = useState<[] | ICoin[]>([]);
+  const [openedID, setOpenedId] = useState<string | null>(null);
 
-  const handleChange = (id) => {
-    setOpenedId((prevId) => {
-      return prevId === id ? null : id;
-    });
+  const handleChange: (id: string) => void = (id) => {
+    setOpenedId((prevId) => (prevId === id ? null : id));
   };
-  const searchedCoin = async (e) => {
+
+  const searchedCoin: (e: string) => void = async (e) => {
     try {
       const result = await getCoin(e);
       if (Array.isArray(result)) {
-        const first6Coins = result.splice(0, 6);
+        const first6Coins: ICoin[] = result.splice(0, 6);
         setCoinsArr(first6Coins);
         return;
       } else {
         setCoinsArr([result]);
         return;
       }
-
     } catch {
       console.log("error");
     }
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedChangeHandler = useCallback(
-    debounce((e) => searchedCoin(e), 600),
+  const debouncedChangeHandler: DebouncedChangeHandler = useCallback(
+    debounce((e: string) => {
+      searchedCoin(e);
+    }, 600),
     []
   );
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput: ChangeHandler = (e) => {
     setQuery(e.target.value);
     debouncedChangeHandler(e.target.value);
   };
@@ -57,24 +66,6 @@ const ModalWindow = ({ isModal, modalClose }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    height: 500,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-  const searchStyle = {
-    display: "flex",
-    flexAlign: "center",
-    mb: 3,
-    height: 50,
-  };
   if (!isModal) return null;
 
   return (
@@ -84,7 +75,7 @@ const ModalWindow = ({ isModal, modalClose }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style} className={styles.modal}>
+      <Box sx={modalStyle} className={styles.modal}>
         <Typography
           id="modal-modal-title"
           variant="h6"

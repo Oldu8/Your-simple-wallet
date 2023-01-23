@@ -13,7 +13,6 @@ import Balance from "../Balance/Balance";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import PortfolioItem from "../PortfolioItem/PortfolioItem";
 import { StyledTableCell } from "../Functions/funcForMUITable";
-// @ts-ignore
 import styles from "./Portfolio.module.scss";
 import { IState } from "../../interface/entities";
 import { cellNamesForPortfolio } from "../../assets/arraysForTable";

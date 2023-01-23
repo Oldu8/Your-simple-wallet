@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 
 import { StyledTableCell } from "../Functions/funcForMUITable";
-// @ts-ignore
 import styles from "./ListOfCoins.module.scss";
 import { IState } from "../../interface/entities";
 import { paginationStyle } from "../Functions/stylesForMUI";

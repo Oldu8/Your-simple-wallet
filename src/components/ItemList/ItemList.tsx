@@ -7,7 +7,6 @@ import {
 } from "../Functions/formatters";
 import { StyledTableCell, StyledTableRow } from "../Functions/funcForMUITable";
 import { priceChangeClass } from "../Functions/priceChangeClass";
-// @ts-ignore
 import styles from "./ItemList.module.scss";
 import { ItemListFunc } from "../../types/types";
 

@@ -1,14 +1,12 @@
 import React from "react";
 import { TableBody } from "@mui/material";
 import { profitFunc } from "../Functions/profitFunc";
-// @ts-ignore
 import TrashIcon from "../../assets/TrashIcon/TrashIcon.svg";
 import { useDispatch } from "react-redux";
 import { removeCoin } from "../../redux-toolkit/addCoinSlice";
 import { priceFormatter, quantityFormatter } from "../Functions/formatters";
 import { StyledTableCell, StyledTableRow } from "../Functions/funcForMUITable";
 import { priceChangeClass } from "../Functions/priceChangeClass";
-// @ts-ignore
 import styles from "./PortfolioItem.module.scss";
 import { ItemPortfolioFunc } from "../../types/types";
 import { ICoinPortfolio } from "../../interface/entities";

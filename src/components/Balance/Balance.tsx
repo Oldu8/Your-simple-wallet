@@ -3,7 +3,6 @@ import { Container, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { priceFormatter } from "../Functions/formatters";
 import { IState } from "../../interface/entities";
-// @ts-ignore
 import styles from "./Balance.module.scss";
 import { balanceStyle } from "../Functions/stylesForMUI";
 
