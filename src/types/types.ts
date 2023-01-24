@@ -12,3 +12,14 @@ export type ModalWindowFunc = (props: {
   isModal: boolean;
   modalClose: () => void;
 }) => JSX.Element | null;
+
+export type SearchedItemComp = (props: {
+  item: ICoinPortfolio;
+  openedID: string | null;
+  setOpen: (props: string) => void;
+  key: number;
+}) => JSX.Element | null;
+
+export type CoinOptionBlockComp = (props: {
+  itemOption: ICoinPortfolio;
+}) => JSX.Element | null;

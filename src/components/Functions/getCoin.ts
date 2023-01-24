@@ -1,8 +1,8 @@
-import { ICoin } from "../../interface/entities";
+import { ICoin, ICoinPortfolio } from "../../interface/entities";
 import { RequestType } from "../../interface/request";
 const apiCoin = "https://api.coingecko.com/api/v3/coins/";
 
-export const getCoin: RequestType<string, ICoin[]> = async (id) => {
+export const getCoin: RequestType<string, ICoinPortfolio[]> = async (id) => {
   let response = await fetch(apiCoin + id);
   let responseBody = await response.json();
   return responseBody;

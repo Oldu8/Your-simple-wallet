@@ -9,7 +9,7 @@ import {
   DebouncedChangeHandler,
   ModalWindowFunc,
 } from "../../types/types";
-import { ICoin } from "../../interface/entities";
+import { ICoinPortfolio } from "../../interface/entities";
 
 type debounceCallBack = (arg: string) => void;
 
@@ -25,7 +25,7 @@ const debounce = (func: debounceCallBack, timeout = 300) => {
 
 const ModalWindow: ModalWindowFunc = ({ isModal, modalClose }) => {
   const [query, setQuery] = useState<string>("");
-  const [coinsArr, setCoinsArr] = useState<[] | ICoin[]>([]);
+  const [coinsArr, setCoinsArr] = useState<[] | ICoinPortfolio[]>([]);
   const [openedID, setOpenedId] = useState<string | null>(null);
 
   const handleChange: (id: string) => void = (id) => {
@@ -36,7 +36,7 @@ const ModalWindow: ModalWindowFunc = ({ isModal, modalClose }) => {
     try {
       const result = await getCoin(e);
       if (Array.isArray(result)) {
-        const first6Coins: ICoin[] = result.splice(0, 6);
+        const first6Coins: ICoinPortfolio[] = result.splice(0, 6);
         setCoinsArr(first6Coins);
         return;
       } else {

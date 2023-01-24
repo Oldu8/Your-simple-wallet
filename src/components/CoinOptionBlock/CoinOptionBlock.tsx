@@ -3,21 +3,22 @@ import styles from "./CoinOptionBlock.module.scss";
 import { Container, TextField, Button } from "@mui/material";
 import { addCoinToPortfolio } from "../../redux-toolkit/addCoinSlice";
 import { useDispatch } from "react-redux";
+import { CoinOptionBlockComp } from "../../types/types";
 
-const CoinOptionBlock = (item) => {
+const CoinOptionBlock: CoinOptionBlockComp = ({ itemOption }) => {
   const inititalState = "";
-  const [queryQuantity, setQueryQuantity] = useState(inititalState);
-  const [queryPrice, setQueryPrice] = useState(inititalState);
+  const [queryQuantity, setQueryQuantity] = useState<string>(inititalState);
+  const [queryPrice, setQueryPrice] = useState<string>(inititalState);
 
   const dispatch = useDispatch();
 
-  const checkComma = (digit) => {
+  const checkComma = (digit: string) => {
     const price = digit.replace(/,/, ".");
     setQueryPrice(price);
   };
 
   const addCoin = () => {
-    const coinInfo = { ...item.item, queryPrice, queryQuantity };
+    const coinInfo = { ...itemOption, queryPrice, queryQuantity };
     dispatch(addCoinToPortfolio(coinInfo));
     setQueryPrice(inititalState);
     setQueryQuantity(inititalState);
@@ -49,7 +50,7 @@ const CoinOptionBlock = (item) => {
         size="small"
         className={styles.button}
         onClick={() => addCoin()}
-        disabled={queryQuantity && queryPrice ? null : true}
+        disabled={queryQuantity && queryPrice ? false : true}
       >
         Add
       </Button>
