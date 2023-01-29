@@ -41,3 +41,15 @@ export interface IState {
     portfolioCoins: ICoinPortfolio[];
   };
 }
+export interface IStateSlice {
+  portfolioCoins: ICoinPortfolio[];
+}
+
+export interface AddCoinAction {
+  type?: string;
+  payload?: {
+    id: string;
+    queryPrice: number;
+    queryQuantity: number;
+  };
+}

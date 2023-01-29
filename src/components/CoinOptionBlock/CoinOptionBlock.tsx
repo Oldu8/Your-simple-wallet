@@ -4,21 +4,26 @@ import { Container, TextField, Button } from "@mui/material";
 import { addCoinToPortfolio } from "../../redux-toolkit/addCoinSlice";
 import { useDispatch } from "react-redux";
 import { CoinOptionBlockComp } from "../../types/types";
+import { AddCoinAction, ICoinPortfolio } from "../../interface/entities";
 
 const CoinOptionBlock: CoinOptionBlockComp = ({ itemOption }) => {
-  const inititalState = "";
-  const [queryQuantity, setQueryQuantity] = useState<string>(inititalState);
-  const [queryPrice, setQueryPrice] = useState<string>(inititalState);
+  const inititalState = 0;
+  const [queryQuantity, setQueryQuantity] = useState<number>(inititalState);
+  const [queryPrice, setQueryPrice] = useState<number>(inititalState);
 
   const dispatch = useDispatch();
 
   const checkComma = (digit: string) => {
     const price = digit.replace(/,/, ".");
-    setQueryPrice(price);
+    setQueryPrice(+price);
   };
 
   const addCoin = () => {
-    const coinInfo = { ...itemOption, queryPrice, queryQuantity };
+    const coinInfo: AddCoinAction & ICoinPortfolio = {
+      ...itemOption,
+      queryPrice,
+      queryQuantity,
+    };
     dispatch(addCoinToPortfolio(coinInfo));
     setQueryPrice(inititalState);
     setQueryQuantity(inititalState);
@@ -32,7 +37,7 @@ const CoinOptionBlock: CoinOptionBlockComp = ({ itemOption }) => {
           label="Quantity"
           variant="standard"
           value={queryQuantity}
-          onChange={(e) => setQueryQuantity(e.target.value)}
+          onChange={(e) => setQueryQuantity(+e.target.value)}
         ></TextField>
       </div>
       <div className={styles.block}>
