@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./ItemList.module.scss";
 import { Typography, TableBody } from "@mui/material";
 import {
   priceFormatter,
@@ -8,10 +7,11 @@ import {
 } from "../Functions/formatters";
 import { StyledTableCell, StyledTableRow } from "../Functions/funcForMUITable";
 import { priceChangeClass } from "../Functions/priceChangeClass";
+import styles from "./ItemList.module.scss";
+import { ItemListFunc } from "../../types/types";
 
-const ItemList = ({ item }) => {
+const ItemList: ItemListFunc = ({ item }) => {
   if (!item) return null;
-
   return (
     <TableBody>
       <StyledTableRow className={styles.row}>
@@ -23,7 +23,11 @@ const ItemList = ({ item }) => {
           <Typography align="center">{item.market_cap_rank}</Typography>
         </StyledTableCell>
         <StyledTableCell align="center">
-          <img src={item.image} className={styles.img}></img>
+          <img
+            src={item.image}
+            className={styles.img}
+            alt="currency icon"
+          ></img>
         </StyledTableCell>
         <StyledTableCell>
           <Typography
@@ -36,7 +40,7 @@ const ItemList = ({ item }) => {
         </StyledTableCell>
         <StyledTableCell>
           <Typography align="center" fontWeight={500}>
-            {priceFormatter.format(item.current_price)}
+            {priceFormatter(+item.current_price)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
@@ -45,12 +49,12 @@ const ItemList = ({ item }) => {
             fontWeight={500}
             className={priceChangeClass(item.price_change_percentage_24h)}
           >
-            {percentageFormatter.format(item.price_change_percentage_24h / 100)}
+            {percentageFormatter(item.price_change_percentage_24h / 100)}
           </Typography>
         </StyledTableCell>
         <StyledTableCell>
           <Typography align="center" fontWeight={500}>
-            {capFormatter.format(item.market_cap)}
+            {capFormatter(+item.market_cap)}
           </Typography>
         </StyledTableCell>
       </StyledTableRow>

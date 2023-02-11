@@ -13,8 +13,10 @@ code {
 }
 
 .percentageMinus {
+  font-size: 1rem;
   color: red;
 }
 .percentagePlus {
+  font-size: 1rem;
   color: green;
 }

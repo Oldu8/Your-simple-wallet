@@ -5,10 +5,8 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import styles from "./Header.module.scss";
 
 const Header = () => {
-  const screenWidth = useMediaQuery({ query: "(max-width: 754px)" });
-  if (screenWidth) {
-    return null;
-  }
+  const isMobile = useMediaQuery({ query: "(max-width: 754px)" });
+  if (isMobile) return null;
   return (
     <AppBar position="static" className={styles.header}>
       <Toolbar
@@ -16,7 +14,7 @@ const Header = () => {
         className={styles.toolbar}
       >
         <Typography variant="h4" align="center">
-          Welcome to your friendly crypto wallet
+          Welcome to your friendly crypto portfolio tracker!
         </Typography>
         <IconButton color="inherit" sx={{ ml: 5 }}>
           <MonetizationOnIcon />

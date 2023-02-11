@@ -1,4 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  AddCoinAction,
+  ICoinPortfolio,
+  IStateSlice,
+} from "../interface/entities";
 
 export const addCoinsSlice = createSlice({
   name: "PORTFOLIO_COINS",
@@ -6,7 +11,10 @@ export const addCoinsSlice = createSlice({
     portfolioCoins: [],
   },
   reducers: {
-    addCoinToPortfolio(state, action) {
+    addCoinToPortfolio(
+      state: IStateSlice,
+      action: PayloadAction<AddCoinAction & ICoinPortfolio>
+    ) {
       const sameCoin = state.portfolioCoins.find(
         (item) => item.id === action.payload.id
       );
@@ -27,7 +35,10 @@ export const addCoinsSlice = createSlice({
         state.portfolioCoins = [...state.portfolioCoins, action.payload];
       }
     },
-    removeCoin(state, action) {
+    removeCoin(
+      state: IStateSlice,
+      action: PayloadAction<AddCoinAction & ICoinPortfolio>
+    ) {
       const newPortfolioCoins = state.portfolioCoins.filter(
         (x) => x.id !== action.payload.id
       );

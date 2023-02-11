@@ -2,8 +2,9 @@ import React from "react";
 import { Button } from "@mui/material";
 import styles from "./SearchedItem.module.scss";
 import CoinOptionBlock from "../CoinOptionBlock/CoinOptionBlock";
+import { SearchedItemComp } from "../../types/types";
 
-const SearchedItem = ({ item, openedID, setOpen }) => {
+const SearchedItem: SearchedItemComp = ({ item, openedID, setOpen }) => {
   const btnStyle = {
     p: 0,
     minWidth: 40,
@@ -25,7 +26,7 @@ const SearchedItem = ({ item, openedID, setOpen }) => {
           +
         </Button>
       </div>
-      {openedID === item.id ? <CoinOptionBlock item={item} /> : null}
+      {openedID === item.id ? <CoinOptionBlock itemOption={item} /> : null}
     </section>
   );
 };
