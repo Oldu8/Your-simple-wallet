@@ -41,8 +41,12 @@ export interface IState {
     portfolioCoins: ICoinPortfolio[];
   };
 }
-export interface IStateSlice {
+export interface IStatePortfolioSlice {
   portfolioCoins: ICoinPortfolio[];
+}
+
+export interface IStateCoinsSlice {
+  coins: ICoin[];
 }
 
 export interface AddCoinAction {

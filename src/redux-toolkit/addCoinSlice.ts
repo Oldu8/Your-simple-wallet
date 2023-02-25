@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   AddCoinAction,
   ICoinPortfolio,
-  IStateSlice,
+  IStatePortfolioSlice,
 } from "../interface/entities";
 
 export const addCoinsSlice = createSlice({
@@ -12,7 +12,7 @@ export const addCoinsSlice = createSlice({
   },
   reducers: {
     addCoinToPortfolio(
-      state: IStateSlice,
+      state: IStatePortfolioSlice,
       action: PayloadAction<AddCoinAction & ICoinPortfolio>
     ) {
       const sameCoin = state.portfolioCoins.find(
@@ -36,7 +36,7 @@ export const addCoinsSlice = createSlice({
       }
     },
     removeCoin(
-      state: IStateSlice,
+      state: IStatePortfolioSlice,
       action: PayloadAction<AddCoinAction & ICoinPortfolio>
     ) {
       const newPortfolioCoins = state.portfolioCoins.filter(

@@ -12,6 +12,6 @@ const api = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&orde
 
 export const getTopCoins: RequestType<string, ICoin[]> = async (page) => {
   let response = await fetch(`${api} + ${page}`);
-  const data = await response.json();
+  const data: ICoin[] = await response.json();
   return data;
 };
